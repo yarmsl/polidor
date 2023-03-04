@@ -1,0 +1,10 @@
+./polymer-be/node_modules
+./polymer-be/dist
+./polymer-be/yarn.lock
+./polymer-be/tsconfig.json
+./polymer-be/upload
+
+./polymer-ui/node_modules
+./polymer-ui/dist
+./polymer-ui/yarn.lock
+./polymer-ui/tsconfig.json

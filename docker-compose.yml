@@ -5,7 +5,7 @@ services:
     volumes:
       - pldr_volume:/app/uploads
     build:
-      context: ../polymer-be
+      context: ./polymer-be
     restart: always
     ports:
       - 5000-5005:5000
@@ -14,7 +14,7 @@ services:
   nginx:
     container_name: polydor-front-container
     build:
-      context: .
+      context: ./polymer-ui
     restart: unless-stopped
     volumes:
       - ./data/nginx:/etc/nginx/conf.d

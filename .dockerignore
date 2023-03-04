@@ -1,0 +1,6 @@
+./polymer-be/node_modules
+./polymer-ui/node_modules
+
+./polymer-be/uploads
+./polymer-be/yarn.lock.json
+./polymer-ui/yarn.lock.json

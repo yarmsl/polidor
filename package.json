@@ -6,6 +6,13 @@
   "author": "Yaroslav Makarov <slideryo@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "install:all": "yarn install && cd ./polymer-be && yarn install && cd ../polymer-ui && yarn install",
+    "dev": "concurrently -p '[{name}]' -c 'bgGreen,bgCyan' -n 'polymer-server,polymer-ui' 'cd ./polymer-be && yarn dev' 'cd ./polymer-ui && yarn dev'",
+    "dev:db": "cd ./polymer-be && yarn dev:db",
+    "dev:ui": "cd ./polymer-ui && yarn dev",
+    "dev:be": "cd ./polymer-be && yarn dev"
+  },
   "devDependencies": {
     "concurrently": "^7.6.0"
   }

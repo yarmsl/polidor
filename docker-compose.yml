@@ -14,6 +14,8 @@ services:
   ui:
     build:
       context: ./polymer-ui
+    volumes:
+      - pldr_uibuild:/ui/dist
   nginx:
     build:
       context: ./nginx
@@ -38,6 +40,7 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 volumes:
   pldr_volume:
+  pldr_uibuild:
 networks:
   pldr_network:
     driver: bridge

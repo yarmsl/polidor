@@ -25,6 +25,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/log:/var/log/nginx
+      - pldr_uibuild:/usr/share/nginx/html
     ports:
       - "80:80"
       - "443:443"

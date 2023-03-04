@@ -1,0 +1,12 @@
+{
+  "name": "polidor-fs",
+  "version": "1.0.0",
+  "description": "MERN stack business card with control panel",
+  "repository": "git@github.com:yarmsl/polidor.git",
+  "author": "Yaroslav Makarov <slideryo@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

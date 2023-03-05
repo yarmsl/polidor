@@ -2,23 +2,23 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { articleAPI } from '~/modules/Articles/store';
-import { authReducer, authAPI } from '~/modules/Auth/store';
-import { bannerAPI } from '~/modules/Banners/store';
-import { customerAPI } from '~/modules/Customer/store';
-import { mailAPI } from '~/modules/Mail/store';
-import { fileAPI } from '~/modules/PresentationFile/store';
-import { productionAPI } from '~/modules/Production/store';
-import { projectAPI } from '~/modules/Project/store';
-import { storyAPI } from '~/modules/Story/store';
+import { articleAPI } from '~/modules/ControlPanel/Articles/store';
+import { authReducer, authAPI } from '~/modules/ControlPanel/Auth/store';
+import { bannerAPI } from '~/modules/ControlPanel/Banners/store';
+import { customerAPI } from '~/modules/ControlPanel/Customer/store';
+import { mailAPI } from '~/modules/ControlPanel/Mail/store';
+import { fileAPI } from '~/modules/ControlPanel/PresentationFile/store';
+import { productionAPI } from '~/modules/ControlPanel/Production/store';
+import { projectAPI } from '~/modules/ControlPanel/Project/store';
+import { storyAPI } from '~/modules/ControlPanel/Story/store';
+import { storyArticleAPI } from '~/modules/ControlPanel/StoryArticle/store';
+import { tagAPI } from '~/modules/ControlPanel/Tag/store';
+import { usersAPI } from '~/modules/ControlPanel/User/store';
+import { vacancyAPI } from '~/modules/ControlPanel/Vacancies/store';
 
 import { dataAPI } from './Data';
 import { ModalStackReducer } from './ModalStack';
 import { notificationsReducer } from './Notifications';
-import { storyArticleAPI } from '../modules/StoryArticle/store';
-import { tagAPI } from '../modules/Tag/store';
-import { usersAPI } from '../modules/User/store';
-import { vacancyAPI } from '../modules/Vacancies/store';
 
 const authPersistConfig = {
   key: 'auth',

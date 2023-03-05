@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import PresentationFile from '~/modules/PresentationFile';
+import PresentationFile from '~/modules/ControlPanel/PresentationFile';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const PresentationCP: FC = () => {

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Tag from '~/modules/Tag';
+import Tag from '~/modules/ControlPanel/Tag';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const Tags: FC = () => {

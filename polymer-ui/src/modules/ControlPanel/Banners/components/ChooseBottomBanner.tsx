@@ -17,9 +17,9 @@ import {
 } from '@mui/material';
 
 import { SERVER_URL } from '~/lib/constants';
+import { useGetAllProjectsQuery } from '~/modules/ControlPanel/Project/store';
 import { useAppDispatch } from '~/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
-import { useGetAllProjectsQuery } from '~/modules/Project/store';
 
 import { useEditBottomBannerMutation, useGetBottomBannerQuery } from '../store';
 

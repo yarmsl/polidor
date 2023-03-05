@@ -17,10 +17,10 @@ import {
 
 import { SERVER_URL } from '~/lib/constants';
 import { file2optiDataurl, file2optiFile } from '~/lib/imageOptimaze';
+import { useGetAllTagsQuery } from '~/modules/ControlPanel/Tag/store';
 import { useAppDispatch } from '~/store';
 import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
-import { useGetAllTagsQuery } from '~/modules/Tag/store';
 import ImagesPreview from '~/UI/atoms/ImagesPreview';
 
 import { useGetAllCustomersQuery } from '../../Customer/store';

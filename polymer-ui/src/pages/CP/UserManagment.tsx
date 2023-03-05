@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import User from '~/modules/User';
+import User from '~/modules/ControlPanel/User';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const UserManagment: FC = () => {

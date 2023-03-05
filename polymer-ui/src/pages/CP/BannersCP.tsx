@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Banners from '~/modules/Banners';
+import Banners from '~/modules/ControlPanel/Banners';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const BannersCP: FC = () => {

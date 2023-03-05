@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Articles from '~/modules/Articles';
+import Articles from '~/modules/ControlPanel/Articles';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const ArticlesCP: FC = () => {

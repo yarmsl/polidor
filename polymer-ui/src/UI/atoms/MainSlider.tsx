@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { Box, Skeleton } from '@mui/material';
 
-import { useGetAllBannersQuery } from '~/modules/Banners/store';
+import { useGetAllBannersQuery } from '~/modules/ControlPanel/Banners/store';
 import FadeCarousel from '~/UI/molecules/FadeCarousel';
 
 import MainArticleSlide from './MainArticleSlide';

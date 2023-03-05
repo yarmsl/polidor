@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router';
 import { Box, Skeleton } from '@mui/material';
 
 import { useMedia } from '~/lib/useMedia';
-import { useGetBottomBannerQuery } from '~/modules/Banners/store';
+import { useGetBottomBannerQuery } from '~/modules/ControlPanel/Banners/store';
 import { useGetProjectsDataQuery } from '~/store/Data';
 import FeedBackDownload from '~/UI/atoms/FeedBackDownload';
 import FeedbackForm from '~/UI/atoms/FeedbackForm';

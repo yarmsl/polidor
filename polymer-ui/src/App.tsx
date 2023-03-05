@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { CssBaseline, ThemeProvider, StyledEngineProvider } from '@mui/material';
 
-import { logout, setAuth, useCheckAuthQuery } from '~/modules/Auth/store';
+import { logout, setAuth, useCheckAuthQuery } from '~/modules/ControlPanel/Auth/store';
 import Routes from '~/Routes';
 import { useAppSelector, useAppDispatch } from '~/store';
 import ModalStack from '~/UI/atoms/ModalStack';

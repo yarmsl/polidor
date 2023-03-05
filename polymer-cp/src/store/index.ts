@@ -11,13 +11,13 @@ import { fileAPI } from '~/modules/PresentationFile/store';
 import { productionAPI } from '~/modules/Production/store';
 import { projectAPI } from '~/modules/Project/store';
 import { storyAPI } from '~/modules/Story/store';
+import { storyArticleAPI } from '~/modules/StoryArticle/store';
+import { tagAPI } from '~/modules/Tag/store';
+import { usersAPI } from '~/modules/User/store';
+import { vacancyAPI } from '~/modules/Vacancies/store';
 
 import { ModalStackReducer } from './ModalStack';
 import { notificationsReducer } from './Notifications';
-import { storyArticleAPI } from '../modules/StoryArticle/store';
-import { tagAPI } from '../modules/Tag/store';
-import { usersAPI } from '../modules/User/store';
-import { vacancyAPI } from '../modules/Vacancies/store';
 
 const authPersistConfig = {
   key: 'auth',

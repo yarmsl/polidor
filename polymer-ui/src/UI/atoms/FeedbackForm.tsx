@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
 
-import { useFeedbackMutation } from '~/modules/Mail/store';
+import { useFeedbackMutation } from '~/modules/ControlPanel/Mail/store';
 import { useAppDispatch } from '~/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 
@@ -19,7 +19,6 @@ const FeedbackForm = (): JSX.Element => {
 
   const handleFeedback = handleSubmit(async (data) => {
     try {
-      console.log(data);
       const res = await sendFeedback(data).unwrap();
       dispatch(showSuccessSnackbar(res?.message || 'Мы свяжемся с вами'));
       reset();

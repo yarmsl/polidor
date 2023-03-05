@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import StoryArticle from '~/modules/StoryArticle';
+import StoryArticle from '~/modules/ControlPanel/StoryArticle';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
 const StoryArticleCP: FC = () => {

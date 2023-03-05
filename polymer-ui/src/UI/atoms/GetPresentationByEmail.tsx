@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
 
 import { useAppDispatch } from '~/store';
-import { useSendFileToMailMutation } from '~/modules/ControlPanel/Mail/store';
+import { useSendFileToMailMutation } from '~/modules/Mail/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 
 const GetPresentationByEmail = (): JSX.Element => {

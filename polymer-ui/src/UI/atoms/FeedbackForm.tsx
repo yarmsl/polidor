@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
 
-import { useFeedbackMutation } from '~/modules/ControlPanel/Mail/store';
+import { useFeedbackMutation } from '~/modules/Mail/store';
 import { useAppDispatch } from '~/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 

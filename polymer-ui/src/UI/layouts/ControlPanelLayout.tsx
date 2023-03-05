@@ -32,7 +32,7 @@ import {
 } from '@mui/material';
 
 import { ReactComponent as Logo } from '~/assets/Logo.svg';
-import { logout } from '~/modules/ControlPanel/Auth/store';
+import { logout } from '~/modules/Auth/store';
 import { useAppDispatch, useAppSelector } from '~/store';
 
 const pages = [

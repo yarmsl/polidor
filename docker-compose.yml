@@ -16,6 +16,11 @@ services:
       context: ./polymer-ui
     volumes:
       - pldr_uibuild:/ui/dist
+  cp:
+    build:
+      context: ./polymer-cp
+    volumes:
+      - pldr_cpbuild:/cp/dist
   nginx:
     build:
       context: ./nginx
@@ -26,6 +31,7 @@ services:
       - ./certbot/www:/var/www/certbot
       - ./nginx/log:/var/log/nginx
       - pldr_uibuild:/usr/share/nginx/html
+      - pldr_cpbuild:/usr/share/nginx/html/cp
     ports:
       - "80:80"
       - "443:443"
@@ -42,6 +48,7 @@ services:
 volumes:
   polymer_volume:
   pldr_uibuild:
+  pldr_cpbuild:
 networks:
   pldr_network:
     driver: bridge

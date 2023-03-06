@@ -15,12 +15,12 @@ services:
     build:
       context: ./polymer-ui
     volumes:
-      - /ui/dist:polymer_uibuild
+      - polymer_uibuild:/ui/dist
   cp:
     build:
       context: ./polymer-cp
     volumes:
-      - /cp/dist:polymer_cpbuild
+      - polymer_cpbuild:/cp/dist
   nginx:
     build:
       context: ./nginx

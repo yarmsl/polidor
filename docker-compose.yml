@@ -30,7 +30,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/log:/var/log/nginx
-      - pldr_uibuild:/usr/share/nginx/html
+      - pldr_uibuild:/usr/share/nginx/html/ui
       - pldr_cpbuild:/usr/share/nginx/html/cp
     ports:
       - "80:80"

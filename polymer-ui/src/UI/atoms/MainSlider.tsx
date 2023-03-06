@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 
 import { Box, Skeleton } from '@mui/material';
 
-import { useGetAllBannersQuery } from '~/modules/ControlPanel/Banners/store';
+import { useGetBannersQuery } from '~/store/Data';
 import FadeCarousel from '~/UI/molecules/FadeCarousel';
 
 import MainArticleSlide from './MainArticleSlide';
 
 const MainSlider = (): JSX.Element => {
-  const { data, isLoading } = useGetAllBannersQuery('');
+  const { data, isLoading } = useGetBannersQuery('');
 
   const slides = useMemo(
     () =>

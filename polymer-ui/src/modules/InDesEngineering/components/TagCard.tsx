@@ -6,7 +6,7 @@ import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { SERVER_URL } from '../../../lib/constants';
 
 interface ITagCardProps {
-  tag: ITagFull;
+  tag: ITag;
 }
 
 export const SkeletonTagCard = (): JSX.Element => {

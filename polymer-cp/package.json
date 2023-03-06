@@ -25,7 +25,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "dev": "vite",
-    "build": "tsc && vite build --base=/castle/",
+    "build": "tsc && vite build --base=/control_panel/",
     "preview": "vite preview",
     "lint": "eslint src",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",

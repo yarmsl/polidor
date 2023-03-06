@@ -11,7 +11,6 @@ const defaultTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'PT Root UI',
     button: {
       textTransform: 'none',
     },

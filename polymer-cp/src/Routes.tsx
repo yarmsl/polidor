@@ -41,16 +41,14 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
           '/stories',
           '/story_articles',
           '/vacancies',
-          '/cp',
-          '/castle',
         ]}
         exact
       >
         {isAuth ? (
           <ControlPanelLayout>
             <Switch>
-              <Route component={ControlPanel} path='/castle' exact />
-              {role !== 'user' && <Route component={UserManagment} path='/user_managment' exact />}
+              <Route component={ControlPanel} path='/' exact />
+              {role === 'admin' && <Route component={UserManagment} path='/user_managment' exact />}
               <Route component={Tags} path='/tags' exact />
               <Route component={CustomersCP} path='/customers' exact />
               <Route component={ProjectsCP} path='/projects' exact />

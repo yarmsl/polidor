@@ -14,13 +14,13 @@ services:
   ui:
     build:
       context: ./polymer-ui
-    volumes:
-      - pldr_uibuild:/ui/dist
+    networks:
+      - pldr_network
   cp:
     build:
       context: ./polymer-cp
-    volumes:
-      - pldr_cpbuild:/cp/dist
+    networks:
+      - pldr_network
   nginx:
     build:
       context: ./nginx
@@ -30,8 +30,8 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/log:/var/log/nginx
-      - pldr_uibuild:/usr/share/nginx/html/ui
-      - pldr_cpbuild:/usr/share/nginx/html/cp
+      - /ui/dist:/usr/share/nginx/html/ui
+      - /cp/dist:/usr/share/nginx/html/cp
     ports:
       - "80:80"
       - "443:443"

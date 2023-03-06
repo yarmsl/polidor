@@ -4,4 +4,4 @@ ADD package.json package.json
 ADD yarn.lock yarn.lock
 RUN yarn install
 ADD . .
-RUN yarn build
+RUN yarn build --base=/castle/

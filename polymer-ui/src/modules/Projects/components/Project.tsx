@@ -7,7 +7,7 @@ import { SERVER_URL } from '~/lib/constants';
 import { useMedia } from '~/lib/useMedia';
 
 interface IProjectProps {
-  project?: IProjectFull;
+  project?: IProject;
 }
 
 const Project: FC<IProjectProps> = ({ project }) => {

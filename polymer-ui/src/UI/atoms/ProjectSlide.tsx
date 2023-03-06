@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { SERVER_URL } from '~/lib/constants';
 
 interface IProjectSlideProps {
-  project: IProjectFull;
+  project: IProject;
   showDescription: boolean;
 }
 

@@ -6,7 +6,7 @@ import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { SERVER_URL } from '../../../lib/constants';
 
 interface ICustomCardProps {
-  customer: ICustomerFull;
+  customer: ICustomer;
 }
 
 export const SkeletonCustomerCard = (): JSX.Element => {

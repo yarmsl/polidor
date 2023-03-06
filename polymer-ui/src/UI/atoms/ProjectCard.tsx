@@ -6,7 +6,7 @@ import { Box, Skeleton, Typography } from '@mui/material';
 import { SERVER_URL } from '~/lib/constants';
 
 interface IProjectCardProps {
-  project: IProjectFull;
+  project: IProject;
 }
 
 export const SkeletonProjectCard = (): JSX.Element => {

@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import ProjectCard, { SkeletonProjectCard } from '~/UI/atoms/ProjectCard';
 
 interface IProjectsDrawerProps {
-  projects?: IProjectFull[];
+  projects?: IProject[];
   isLoading: boolean;
 }
 

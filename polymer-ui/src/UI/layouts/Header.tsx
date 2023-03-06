@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { Suspense, lazy, useCallback, useMemo, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,9 +8,11 @@ import { AppBar, Button, Container, IconButton } from '@mui/material';
 
 import Logo from '~/UI/atoms/Logo';
 
-import BurgerMenu from './BurgerMenu';
 import { pages } from './MainLayout';
 import { useMedia } from '../../lib/useMedia';
+import Loading from '../atoms/Loading';
+
+const BurgerMenu = lazy(() => import('./BurgerMenu'));
 
 const Header = (): JSX.Element => {
   const router = useHistory();
@@ -62,7 +64,11 @@ const Header = (): JSX.Element => {
           )}
         </Container>
       </AppBar>
-      {matchesTablet && <BurgerMenu handle={handleBurger} open={open} />}
+      {matchesTablet && (
+        <Suspense fallback={<Loading />}>
+          <BurgerMenu handle={handleBurger} open={open} />
+        </Suspense>
+      )}
     </>
   );
 };

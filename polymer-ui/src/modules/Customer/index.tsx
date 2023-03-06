@@ -8,7 +8,7 @@ import { SERVER_URL } from '~/lib/constants';
 import JointProjectCard, { SkeletonJointProjectCard } from './components/JointProjectCard';
 
 interface ICustomerProps {
-  customer?: ICustomerFull;
+  customer?: ICustomer;
   isLoading?: boolean;
 }
 

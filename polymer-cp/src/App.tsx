@@ -31,7 +31,7 @@ const App = (): ReactElement => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router basename='/castle'>
+        <Router basename='/control_panel'>
           <Routes isAuth={isAuth} role={role} />
         </Router>
         <ModalStack />

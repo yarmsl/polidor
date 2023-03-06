@@ -2,14 +2,14 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
 
-import { useFeedbackMutation } from '~/modules/ControlPanel/Mail/store';
 import { useAppDispatch } from '~/store';
+import { useFeedbackMutation } from '~/store/Data';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 
 const FeedbackForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [sendFeedback, { isLoading }] = useFeedbackMutation();
-  const { control, handleSubmit, reset } = useForm<Ifeedback>({
+  const { control, handleSubmit, reset } = useForm<IFeedback>({
     defaultValues: {
       name: '',
       email: '',

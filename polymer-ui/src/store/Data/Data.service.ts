@@ -8,19 +8,19 @@ export const dataAPI = createApi({
     baseUrl: `${SERVER_URL}/api`,
   }),
   endpoints: (build) => ({
-    getProjectsData: build.query<IProjectFull[], string>({
+    getProjectsData: build.query<IProject[], string>({
       query: () => ({
         url: '/project',
         method: 'GET',
       }),
     }),
-    getTagsData: build.query<ITagFull[], string>({
+    getTagsData: build.query<ITag[], string>({
       query: () => ({
         url: '/tag',
         method: 'GET',
       }),
     }),
-    getCustomersData: build.query<ICustomerFull[], string>({
+    getCustomersData: build.query<ICustomer[], string>({
       query: () => ({
         url: '/customer',
         method: 'GET',
@@ -56,6 +56,32 @@ export const dataAPI = createApi({
         method: 'GET',
       }),
     }),
+    getBanners: build.query<IBanner[], string>({
+      query: () => ({
+        url: '/banner',
+        method: 'GET',
+      }),
+    }),
+    getBottomBanner: build.query<IBottomBanner, string>({
+      query: () => ({
+        url: '/banner/bottom',
+        method: 'GET',
+      }),
+    }),
+    sendFileToMail: build.mutation<IMessage, IWantFile>({
+      query: (data) => ({
+        url: '/mail/file',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    feedback: build.mutation<IMessage, IFeedback>({
+      query: (data) => ({
+        url: '/mail/feedback',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -68,4 +94,8 @@ export const {
   useGetStoriesDataQuery,
   useGetStoryArticlesDataQuery,
   useGetVacanciesDataQuery,
+  useGetBannersQuery,
+  useGetBottomBannerQuery,
+  useSendFileToMailMutation,
+  useFeedbackMutation,
 } = dataAPI;

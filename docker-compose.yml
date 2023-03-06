@@ -47,8 +47,6 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 volumes:
   polymer_volume:
-  pldr_uibuild:
-  pldr_cpbuild:
 networks:
   pldr_network:
     driver: bridge

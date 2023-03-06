@@ -7,10 +7,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "install:all": "yarn install && cd ./polymer-be && yarn install && cd ../polymer-ui && yarn install",
-    "dev": "concurrently -p '[{name}]' -c 'bgGreen,bgCyan' -n 'polymer-server,polymer-ui' 'cd ./polymer-be && yarn dev' 'cd ./polymer-ui && yarn dev'",
+    "install:all": "yarn install && cd ./polymer-be && yarn install && cd ../polymer-ui && yarn install && cd ../polymer-cp && yarn install",
+    "dev": "concurrently -p '[{name}]' -c 'bgGreen,bgCyan,green' -n 'polymer-server,polymer-ui,control-panel' 'cd ./polymer-be && yarn dev' 'cd ./polymer-ui && yarn dev' 'cd ./polymer-cp && yarn dev'",
     "dev:db": "cd ./polymer-be && yarn dev:db",
     "dev:ui": "cd ./polymer-ui && yarn dev",
+    "dev:cp": "cd ./polymer-cp && yarn dev",
     "dev:be": "cd ./polymer-be && yarn dev"
   },
   "devDependencies": {

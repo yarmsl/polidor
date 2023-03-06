@@ -14,13 +14,13 @@ services:
   ui:
     build:
       context: ./polymer-ui
-    networks:
-      - pldr_network
+    volumes:
+      - polymer_uibuild:/ui/dist
   cp:
     build:
       context: ./polymer-cp
-    networks:
-      - pldr_network
+    volumes:
+      - polymer_cpbuild:/cp/dist
   nginx:
     build:
       context: ./nginx
@@ -30,8 +30,8 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/log:/var/log/nginx
-      - /ui/dist:/usr/share/nginx/html/ui
-      - /cp/dist:/usr/share/nginx/html/cp
+      - polymer_uibuild:/usr/share/nginx/html/ui
+      - polymer_cpbuild:/usr/share/nginx/html/cp
     ports:
       - "80:80"
       - "443:443"
@@ -47,6 +47,8 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 volumes:
   polymer_volume:
+  polymer_uibuild:
+  polymer_cpbuild:
 networks:
   pldr_network:
     driver: bridge

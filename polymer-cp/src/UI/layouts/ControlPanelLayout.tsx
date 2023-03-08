@@ -14,6 +14,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import TagIcon from '@mui/icons-material/Tag';
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
@@ -47,6 +48,12 @@ const pages = [
     path: '/user_managment',
     icon: <GroupRoundedIcon />,
     access: 'admin',
+  },
+  {
+    title: 'Картинки на главной',
+    path: '/main_pictures',
+    icon: <PhotoSizeSelectActualIcon />,
+    access: 'user',
   },
   {
     title: 'Теги (Проекты)',
@@ -197,7 +204,7 @@ const styles: TStyles = {
     height: '56px',
     display: 'flex',
     justifyContent: 'space-between',
-  } as const,
+  },
 };
 
 export default memo(ControlPanelLayout);

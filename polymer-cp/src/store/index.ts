@@ -7,6 +7,7 @@ import { authReducer, authAPI } from '~/modules/Auth/store';
 import { bannerAPI } from '~/modules/Banners/store';
 import { customerAPI } from '~/modules/Customer/store';
 import { mailAPI } from '~/modules/Mail/store';
+import { mainPicturesAPI } from '~/modules/MainPictures/store/mainPictures.service';
 import { fileAPI } from '~/modules/PresentationFile/store';
 import { productionAPI } from '~/modules/Production/store';
 import { projectAPI } from '~/modules/Project/store';
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   [storyAPI.reducerPath]: storyAPI.reducer,
   [storyArticleAPI.reducerPath]: storyArticleAPI.reducer,
   [vacancyAPI.reducerPath]: vacancyAPI.reducer,
+  [mainPicturesAPI.reducerPath]: mainPicturesAPI.reducer,
 });
 
 const appStore = configureStore({
@@ -61,6 +63,7 @@ const appStore = configureStore({
       storyAPI.middleware,
       storyArticleAPI.middleware,
       vacancyAPI.middleware,
+      mainPicturesAPI.middleware,
     ),
 });
 

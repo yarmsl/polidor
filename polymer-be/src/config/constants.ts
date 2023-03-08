@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 config();
 
 export const DB_HOST = process.env.DB_HOST || '';
-export const PORT = process.env.PORT || '';
+export const PORT = process.env.PORT || 5000;
 export const HOST = process.env.HOST || '';
 export const JWT_SECRET = process.env.JWT || '';
 export const FRONT_HOST_DEV = process.env.FRONT_HOST_DEV || '';

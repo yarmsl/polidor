@@ -16,6 +16,7 @@ const router = Router();
 router.post(
   '/signup',
   authCheck,
+  protect,
   [
     check('email', 'incorrect email').isEmail(),
     check('password', 'min password length 6').isLength({ min: 6 }),

@@ -1,9 +1,10 @@
-import 'module-alias/register';
 import express from 'express';
 
-import cors from 'cors';
+import moduleAlias from 'module-alias';
+moduleAlias.addAlias('~', __dirname);
 import mongoose from 'mongoose';
-
+// eslint-disable-next-line import/order
+import cors from 'cors';
 import { DB_HOST, PORT, SCOPE_HOST } from '~/config/constants';
 import Article from '~/modules/Article';
 import Auth from '~/modules/Auth';

@@ -9,6 +9,7 @@ import BannersCP from './pages/BannersCP';
 import ControlPanel from './pages/ControlPanel';
 import CustomersCP from './pages/CustomersCP';
 import MailCP from './pages/MailCP';
+import MainPicturesPage from './pages/MainPicturesPage';
 import PresentationCP from './pages/PresentationCP';
 import ProductionCP from './pages/ProductionCP';
 import ProjectsCP from './pages/ProjectsCP';
@@ -41,6 +42,7 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
           '/stories',
           '/story_articles',
           '/vacancies',
+          '/main_pictures',
         ]}
         exact
       >
@@ -60,6 +62,7 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
               <Route component={StoryCP} path='/stories' exact />
               <Route component={StoryArticleCP} path='/story_articles' exact />
               <Route component={VacancyCP} path='/vacancies' exact />
+              <Route component={MainPicturesPage} path='/main_pictures' exact />
             </Switch>
           </ControlPanelLayout>
         ) : (

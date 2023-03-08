@@ -91,3 +91,8 @@ interface IFeedback {
   email: string;
   phone: string;
 }
+
+interface IMainPicture {
+  src: string;
+  order: number;
+}

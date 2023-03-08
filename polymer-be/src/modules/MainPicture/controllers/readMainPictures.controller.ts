@@ -9,7 +9,7 @@ export const readMainPicturesController = async (req: Request, res: Response) =>
   try {
     const mainPictures = await MainPicture.find({
       order: [1, 2, 3],
-    });
+    }).populate('author');
 
     if (Array.isArray(mainPictures) && mainPictures.length > 0) {
       mainPictures?.sort((a, b) => a.order - b.order);
@@ -20,7 +20,6 @@ export const readMainPicturesController = async (req: Request, res: Response) =>
     } else {
       const mainPicturesFE = mainPictures?.map((mp) => {
         return {
-          _id: mp._id,
           src: mp.src,
           order: mp.order,
         };

@@ -7,11 +7,6 @@ import { User } from '../User.model';
 
 export const signUpController = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { role } = req.body.user;
-    if (role !== 'admin') {
-      res.status(400).json({ message: 'not enough rights' });
-      return;
-    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const err = errors.mapped();

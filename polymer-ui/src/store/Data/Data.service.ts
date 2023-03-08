@@ -82,6 +82,12 @@ export const dataAPI = createApi({
         body: data,
       }),
     }),
+    getMainPictures: build.query<IMainPicture[], void>({
+      query: () => ({
+        url: '/main_pictures',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -98,4 +104,5 @@ export const {
   useGetBottomBannerQuery,
   useSendFileToMailMutation,
   useFeedbackMutation,
+  useGetMainPicturesQuery,
 } = dataAPI;

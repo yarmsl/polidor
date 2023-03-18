@@ -12,11 +12,13 @@ services:
     networks:
       - pldr_network
   ui:
+    command: docker volume rm polymer_uibuild
     build:
       context: ./polymer-ui
     volumes:
       - polymer_uibuild:/ui/dist
   cp:
+    command: docker volume rm polymer_cpbuild
     build:
       context: ./polymer-cp
     volumes:

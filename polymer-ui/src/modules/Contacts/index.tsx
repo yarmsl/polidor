@@ -16,9 +16,9 @@ const Contacts: React.FC = () => {
             Контакты
           </Typography>
           <Typography>ООО «Урал-Полимер»</Typography>
-          <Typography>+7 (351) 260-40-64</Typography>
-          <Typography>+7 (351) 269-97-89</Typography>
-          <Typography>+7 (351) 269-97-91</Typography>
+          <Typography>8 (351) 269-97-89</Typography>
+          <Typography>8 (351) 269-97-91</Typography>
+          <Typography>8 (351) 269-97-92</Typography>
           <Typography>Info@polidor.ru</Typography>
           <Typography>avm@polidor.ru</Typography>
         </Box>

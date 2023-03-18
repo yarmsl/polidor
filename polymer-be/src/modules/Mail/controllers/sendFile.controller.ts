@@ -27,7 +27,7 @@ export const sendFileController = async (req: Request, res: Response) => {
       from: mail.email,
       to: email,
       subject: 'УРАЛ-ПОЛИМЕР - Презентация',
-      text: 'ООО Урал-Полимер  + 7 (351) 260-40-64',
+      text: 'ООО Урал-Полимер',
       attachments: [
         {
           path: `${HOST}/${file.file}`,

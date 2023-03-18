@@ -54,8 +54,8 @@ const Header = (): JSX.Element => {
                   {page.title}
                 </Button>
               ))}
-              <Button color='inherit' href='tel:+73512604064' sx={link}>
-                {matchesHead ? '+7 (351) 260-40-64' : <PhoneEnabledIcon fontSize='small' />}
+              <Button color='inherit' href='tel:83512699789' sx={link}>
+                {matchesHead ? '8 (351) 269-97-89' : <PhoneEnabledIcon fontSize='small' />}
               </Button>
             </>
           )}

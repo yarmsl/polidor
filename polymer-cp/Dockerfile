@@ -4,4 +4,5 @@ ADD package.json package.json
 ADD yarn.lock yarn.lock
 RUN yarn install
 ADD . .
+RUN docker volume rm polymer_cpbuild
 RUN yarn build

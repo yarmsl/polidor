@@ -41,8 +41,8 @@ const BurgerMenu = ({ open, handle }: IBurgerMenuProps): JSX.Element => {
             </Fragment>
           ))}
         </List>
-        <ListItemButton component='a' href='tel:+73512604064' sx={styles.listButton}>
-          +7 (351) 260-40-64
+        <ListItemButton component='a' href='tel:83512699789' sx={styles.listButton}>
+          8 (351)269-97-89
         </ListItemButton>
         <Button
           color='primary'

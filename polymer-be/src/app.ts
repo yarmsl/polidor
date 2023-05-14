@@ -3,9 +3,10 @@ import express from 'express';
 import moduleAlias from 'module-alias';
 moduleAlias.addAlias('~', __dirname);
 import mongoose from 'mongoose';
+import morgan from 'morgan';
 // eslint-disable-next-line import/order
 import cors from 'cors';
-import { DB_HOST, PORT, SCOPE_HOST } from '~/config/constants';
+import { DB_HOST, IS_DEV, PORT, SCOPE_HOST } from '~/config/constants';
 import Article from '~/modules/Article';
 import Auth from '~/modules/Auth';
 import Banner from '~/modules/Banner';
@@ -27,6 +28,8 @@ const corsOptions = {
 };
 
 const app = express();
+
+if (IS_DEV) app.use(morgan('dev'));
 
 app.use(cors(corsOptions));
 

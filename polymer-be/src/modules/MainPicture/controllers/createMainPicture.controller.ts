@@ -11,7 +11,7 @@ export const createMainPictureController = async (req: Request, res: Response) =
   try {
     const { userId } = req.body.user;
     const src = req.file != null ? req.file.path : '';
-    const { order } = req.body;
+    const { order, tab } = req.body;
 
     if (+order < 1 || +order > 3) {
       if (existsSync(src)) {
@@ -20,7 +20,7 @@ export const createMainPictureController = async (req: Request, res: Response) =
       throw new HttpError('wrong order', 400);
     }
 
-    const existedMainPicture = await MainPicture.findOne({ order });
+    const existedMainPicture = await MainPicture.findOne({ order, tab });
 
     if (existedMainPicture) {
       await existedMainPicture.updateOne({ src });
@@ -48,6 +48,7 @@ export const createMainPictureController = async (req: Request, res: Response) =
       author: userId,
       src,
       order,
+      tab,
     });
     await mainPicture.save();
     await User.findByIdAndUpdate(req.body.user.userId, {

@@ -4,4 +4,7 @@ interface IMainPicture extends TDocument {
   author: TObjectId;
   src: string;
   order: number;
+  tab: TMainPicturesTabs;
 }
+
+type TMainPicturesTabs = 'design' | 'model' | 'engineering' | 'production' | 'perfect';

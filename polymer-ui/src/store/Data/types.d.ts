@@ -95,4 +95,7 @@ interface IFeedback {
 interface IMainPicture {
   src: string;
   order: number;
+  tab: TMainPicturesTabs;
 }
+
+type TMainPicturesTabs = 'design' | 'model' | 'engineering' | 'production' | 'perfect';

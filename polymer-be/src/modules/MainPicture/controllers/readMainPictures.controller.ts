@@ -22,6 +22,7 @@ export const readMainPicturesController = async (req: Request, res: Response) =>
         return {
           src: mp.src,
           order: mp.order,
+          tab: mp.tab,
         };
       });
       return res.status(200).json(mainPicturesFE);

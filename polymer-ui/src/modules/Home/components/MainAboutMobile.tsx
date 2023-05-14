@@ -1,13 +1,19 @@
+import React from 'react';
+
 import { Box } from '@mui/material';
 
 import MainAboutMobileCard from './MainAboutMobileCard';
+import MainPictures from './MainPictures';
 import { abouts } from '../../../lib/about';
 
 const MainAboutMobile = (): JSX.Element => {
   return (
     <Box sx={styles.root}>
       {abouts.map((about, i) => (
-        <MainAboutMobileCard key={i} about={about} />
+        <React.Fragment key={i}>
+          <MainAboutMobileCard about={about} />
+          <MainPictures swiperIndex={i} />
+        </React.Fragment>
       ))}
     </Box>
   );

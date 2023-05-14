@@ -1,14 +1,25 @@
 import { FC, memo } from 'react';
 
-import { Box, Container, Skeleton } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 
 import { SERVER_URL } from '~/lib/constants';
 import { useGetMainPicturesQuery } from '~/store/Data';
+interface IMainPicturesProps {
+  swiperIndex: number;
+}
 
-const MainPictures: FC = () => {
-  const { data, isFetching } = useGetMainPicturesQuery();
+const tabs = ['design', 'model', 'engineering', 'production', 'perfect'];
+
+const MainPictures: FC<IMainPicturesProps> = ({ swiperIndex }) => {
+  const { data, isFetching } = useGetMainPicturesQuery(void 1, {
+    selectFromResult: (query) => ({
+      ...query,
+      data: query.data?.filter((pic) => pic.tab === tabs[swiperIndex]) || [],
+    }),
+  });
+
   return (
-    <Container maxWidth='md' sx={styles.root}>
+    <Box sx={styles.root}>
       {data?.map((pic) => (
         <Box key={pic.order}>
           {isFetching ? (
@@ -18,16 +29,18 @@ const MainPictures: FC = () => {
           )}
         </Box>
       ))}
-    </Container>
+    </Box>
   );
 };
 
 const styles: TStyles = {
   root: {
+    width: '100%',
     height: { xs: 'unset', md: '180px' },
     display: 'flex',
     flexDirection: { xs: 'column', md: 'row' },
     alignItems: 'center',
+    justifyContent: 'center',
     p: '12px 0',
     boxSizing: 'border-box',
     '&>*:not(:last-of-type)': {

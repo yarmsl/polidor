@@ -4,7 +4,6 @@ import { useMedia } from '~/lib/useMedia';
 
 import MainAbout from './components/MainAbout';
 import MainAboutMobile from './components/MainAboutMobile';
-import MainPictures from './components/MainPictures';
 import TrustUs from './components/TrustUs';
 
 const Home: React.FC = () => {
@@ -12,7 +11,6 @@ const Home: React.FC = () => {
   return (
     <>
       {matchesMobile ? <MainAboutMobile /> : <MainAbout />}
-      <MainPictures />
       <TrustUs />
     </>
   );

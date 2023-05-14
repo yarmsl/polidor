@@ -5,11 +5,12 @@ import { EffectFade } from 'swiper';
 import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import MainPictures from './MainPictures';
 import { abouts } from '../../../lib/about';
 
 const MainAbout = (): JSX.Element => {
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
-  const [swiperIndex, setSwiperIndex] = useState<number>(1);
+  const [swiperIndex, setSwiperIndex] = useState(1);
   const toSlide = useCallback((index: number) => swiper?.slideTo(index), [swiper]);
 
   return (
@@ -49,6 +50,7 @@ const MainAbout = (): JSX.Element => {
           })}
         </Swiper>
       </Box>
+      <MainPictures swiperIndex={swiperIndex} />
     </Container>
   );
 };

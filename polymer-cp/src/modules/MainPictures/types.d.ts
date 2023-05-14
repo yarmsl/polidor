@@ -4,5 +4,8 @@ interface IMainPicture {
   author: IUser;
   src: string;
   order: number;
+  tab: TMainPicturesTabs;
   _id: string;
 }
+
+type TMainPicturesTabs = 'design' | 'model' | 'engineering' | 'production' | 'perfect';

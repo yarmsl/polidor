@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 import { Article } from '../Article.model';
 
-export const updateArticleController = async (req: Request, res: Response): Promise<void> => {
+export const updateArticleController = async (req: Request, res: Response) => {
   try {
     const { articleId } = req.params;
     let images: string[] | undefined = undefined;
@@ -44,14 +44,12 @@ export const updateArticleController = async (req: Request, res: Response): Prom
     }
 
     if (editingArticle) {
-      await editingArticle.updateOne({
-        title,
-        content,
-        images,
-      });
-      const result = await Article.findById(articleId);
-      res.status(200).json(result);
-      return;
+      const result = await Article.findByIdAndUpdate(
+        editingArticle._id,
+        { title, content, images },
+        { new: true },
+      );
+      return res.status(200).json(result);
     } else {
       res.status(404).json({ message: 'article not found' });
       return;

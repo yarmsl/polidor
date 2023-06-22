@@ -5,6 +5,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 
 import { SERVER_URL } from '~/lib/constants';
 import { useMedia } from '~/lib/useMedia';
+import YouTubeBox from '~/UI/atoms/YouTubeBox';
 
 interface IProjectProps {
   project?: IProject;
@@ -56,10 +57,11 @@ const Project: FC<IProjectProps> = ({ project }) => {
                 </Box>
               );
             })}
-            <Typography variant='subtitle1'>Изображения взяты из открытых источников</Typography>
           </Box>
+          <Typography variant='subtitle1'>Изображения взяты из открытых источников</Typography>
         </Box>
       )}
+      <YouTubeBox embedId='' title='' autoplay mute />
       <Button color='primary' variant='contained' onClick={() => router.goBack()}>
         Вернуться назад
       </Button>

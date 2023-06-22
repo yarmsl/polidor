@@ -75,7 +75,7 @@ export const editProjectController = async (req: Request, res: Response) => {
           }
         });
       }
-      await editingProject.updateOne({
+      await editingProject.update({
         title,
         year,
         done,

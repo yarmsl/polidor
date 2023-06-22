@@ -6,7 +6,7 @@ import { User } from '../User.model';
 
 export const getUsersController = async (req: Request, res: Response) => {
   try {
-    const users = await User.find({});
+    const users = await User.find();
     if (!Array.isArray(users) || users.length) throw notFoundError();
     const result = users.map((user) => {
       return {

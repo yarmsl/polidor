@@ -18,4 +18,5 @@ declare interface IUser extends TDocument {
   vacancies: TObjectId[];
   presentationFile: TObjectId;
   mainPictures: TObjectId[];
+  youtubeVideos: TObjectId[];
 }

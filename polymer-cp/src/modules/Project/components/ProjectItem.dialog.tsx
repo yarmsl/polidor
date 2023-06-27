@@ -17,10 +17,10 @@ import {
 
 import { SERVER_URL } from '~/lib/constants';
 import { file2optiDataurl, file2optiFile } from '~/lib/imageOptimaze';
+import { useGetAllTagsQuery } from '~/modules/Tag/store';
 import { useAppDispatch } from '~/store';
 import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
-import { useGetAllTagsQuery } from '~/modules/Tag/store';
 import ImagesPreview from '~/UI/atoms/ImagesPreview';
 
 import { useGetAllCustomersQuery } from '../../Customer/store';
@@ -86,7 +86,7 @@ const ProjectItemDialog = ({ project, edit }: IProjectDialogProps): JSX.Element 
     [dispatch],
   );
 
-  const handleEditCustomer = handleSubmit(async (data) => {
+  const handleEditProject = handleSubmit(async (data) => {
     try {
       const formData = new FormData();
       files?.forEach((file) => formData.append('images', file as Blob));
@@ -301,7 +301,7 @@ const ProjectItemDialog = ({ project, edit }: IProjectDialogProps): JSX.Element 
             endIcon={
               isLoading ? <CircularProgress color='inherit' size={20} /> : <SaveRoundedIcon />
             }
-            onClick={handleEditCustomer}
+            onClick={handleEditProject}
           >
             Сохранить
           </Button>

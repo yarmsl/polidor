@@ -30,7 +30,7 @@ export const editProductionArticleController = async (
           }
         });
       }
-      await editingProductionArticle.updateOne({
+      await editingProductionArticle.update({
         title,
         content,
         steps,

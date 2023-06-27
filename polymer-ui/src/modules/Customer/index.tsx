@@ -73,6 +73,7 @@ const styles: TStyles = {
     display: 'flex',
     order: { xs: 0, md: 1 },
     minWidth: { xs: '100%', md: '25%' },
+    maxWidth: { xs: '100%', md: '25%' },
     p: { xs: '0 15%', sm: '0 20%', md: '0' },
     mb: { xs: '18px', md: '' },
     '& img': {

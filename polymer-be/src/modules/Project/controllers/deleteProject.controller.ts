@@ -5,6 +5,7 @@ import { Request, Response } from 'express';
 import { Customer } from '~/modules/Customer/';
 import { Tag } from '~/modules/Tag';
 import { User } from '~/modules/User/';
+import { YoutubeVideo } from '~/modules/YoutubeVideo';
 
 import { Project } from '../Project.model';
 
@@ -19,11 +20,18 @@ export const deleteProjectController = async (req: Request, res: Response) => {
       await Customer.findByIdAndUpdate(removingProject.customer, {
         $pull: { projects: removingProject._id },
       });
-      removingProject.tags?.forEach(async (tag) => {
-        await Tag.findByIdAndUpdate(tag, {
-          $pull: { projects: removingProject._id },
-        });
+
+      await YoutubeVideo.findByIdAndUpdate(removingProject.youtubeVideo, {
+        $pull: { projects: removingProject._id },
       });
+
+      await Tag.updateMany(
+        { _id: { $in: removingProject.tags } },
+        {
+          $pull: { projects: removingProject._id },
+        },
+      );
+
       removingProject.images?.forEach((path) => {
         if (existsSync(path)) {
           unlinkSync(path);

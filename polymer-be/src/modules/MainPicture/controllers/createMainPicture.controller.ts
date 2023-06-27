@@ -23,7 +23,7 @@ export const createMainPictureController = async (req: Request, res: Response) =
     const existedMainPicture = await MainPicture.findOne({ order, tab });
 
     if (existedMainPicture) {
-      await existedMainPicture.updateOne({ src });
+      await existedMainPicture.update({ src });
 
       if (existedMainPicture.author !== req.body.user.userId) {
         await User.findByIdAndUpdate(existedMainPicture.author, {

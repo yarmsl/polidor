@@ -18,6 +18,7 @@ import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import TagIcon from '@mui/icons-material/Tag';
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   AppBar,
   Container,
@@ -107,6 +108,12 @@ const pages = [
     title: 'Баннеры',
     path: '/banners',
     icon: <ViewCarouselIcon />,
+    access: 'user',
+  },
+  {
+    title: 'Youtube',
+    path: '/youtube_videos',
+    icon: <YouTubeIcon />,
     access: 'user',
   },
   {

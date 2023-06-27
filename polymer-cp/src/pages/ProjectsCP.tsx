@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import { FC } from 'react';
 
 import Project from '~/modules/Project';

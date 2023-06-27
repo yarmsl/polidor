@@ -16,6 +16,7 @@ interface IProject {
   tags: ITag[];
   slug: string;
   order: number;
+  youtubeVideo: IYoutubeVideo | null;
 }
 
 interface ICustomer {
@@ -96,6 +97,18 @@ interface IMainPicture {
   src: string;
   order: number;
   tab: TMainPicturesTabs;
+}
+
+interface IYoutubeVideo {
+  createdAt: string;
+  updatedAt: string;
+  author: string;
+  projects: string[];
+  title: string;
+  embedId: string;
+  autoplay: boolean;
+  mute: boolean;
+  isMain: boolean;
 }
 
 type TMainPicturesTabs = 'design' | 'model' | 'engineering' | 'production' | 'perfect';

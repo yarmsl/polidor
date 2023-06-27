@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 
 import { Customer } from '~/modules/Customer';
 import { Tag } from '~/modules/Tag';
+import { errorHandler, existsError, notFoundError } from '~/utils/errorHandler';
 
 import { Project } from '../Project.model';
 
@@ -16,7 +17,7 @@ export const editProjectController = async (req: Request, res: Response) => {
     const { title, year, done, customer, tags, images: imagesPaths, slug, order } = req.body;
     const projectExist = await Project.findOne({ slug });
     if (projectExist) {
-      res.status(400).json({ message: 'this project exists' });
+      throw existsError('this project exists');
     }
 
     const editingProject = await Project.findById(projectId);
@@ -59,23 +60,32 @@ export const editProjectController = async (req: Request, res: Response) => {
           $push: { projects: editingProject._id },
         });
       }
-      if (Array.isArray(tags) && tags.length > 0) {
-        editingProject.tags?.forEach(async (tag) => {
-          if (!tags.includes(tag.toString())) {
-            await Tag.findByIdAndUpdate(tag, {
-              $pull: { projects: editingProject._id },
-            });
-          }
-        });
-        tags.forEach(async (tag) => {
-          if (!editingProject.tags.map((t) => t.toString()).includes(tag)) {
-            await Tag.findByIdAndUpdate(tag, {
-              $push: { projects: editingProject._id },
-            });
-          }
-        });
+      if (Array.isArray(tags)) {
+        await Tag.updateMany(
+          { projects: { $exists: editingProject._id } },
+          { $pull: { projects: editingProject._id } },
+        );
+        if (tags.length)
+          await Tag.updateMany({ _id: { $in: tags } }, { $push: { projects: editingProject._id } });
+
+        // @deprecated
+        // editingProject.tags?.forEach(async (tag) => {
+        //   if (!tags.includes(tag.toString())) {
+        //     await Tag.findByIdAndUpdate(tag, {
+        //       $pull: { projects: editingProject._id },
+        //     });
+        //   }
+        // });
+        // tags.forEach(async (tag) => {
+        //   if (!editingProject.tags.map((t) => t.toString()).includes(tag)) {
+        //     await Tag.findByIdAndUpdate(tag, {
+        //       $pull: { projects: editingProject._id },
+        //     });
+        //   }
+        // });
       }
-      await editingProject.updateOne({
+
+      const result = await Project.findByIdAndUpdate(projectId, {
         title,
         year,
         done,
@@ -85,15 +95,12 @@ export const editProjectController = async (req: Request, res: Response) => {
         slug,
         order,
       });
-      const result = await Project.findById(projectId);
-      res.status(200).json(result);
-      return;
+      return res.status(200).json(result);
     } else {
-      res.status(404).json({ message: 'project not found' });
-      return;
+      throw notFoundError('project not found');
     }
   } catch (e) {
-    res.status(500).json({ message: 'editing project error' });
-    return;
+    const { statusCode, message } = errorHandler(e, 'editing project error');
+    return res.status(statusCode).json({ message });
   }
 };

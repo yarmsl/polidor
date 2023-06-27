@@ -5,7 +5,8 @@ import { Project } from '../Project.model';
 export const getAllProjectsController = async (req: Request, res: Response) => {
   const userId = req.body?.user?.userId;
   try {
-    const projects = await Project.find().populate('author').populate('tags').populate('customer');
+    const projects = await Project.find().populate(['author', 'tags', 'customer', 'youtubeVideo']);
+
     if (Array.isArray(projects) && projects.length > 0) {
       projects?.sort((a, b) => a.order - b.order);
     }
@@ -24,6 +25,7 @@ export const getAllProjectsController = async (req: Request, res: Response) => {
           tags: project.tags,
           slug: project.slug,
           order: project.order,
+          youtubeVideo: project.youtubeVideo,
         };
       });
       res.status(200).json(projectsFE);

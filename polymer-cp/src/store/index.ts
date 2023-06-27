@@ -16,6 +16,7 @@ import { storyArticleAPI } from '~/modules/StoryArticle/store';
 import { tagAPI } from '~/modules/Tag/store';
 import { usersAPI } from '~/modules/User/store';
 import { vacancyAPI } from '~/modules/Vacancies/store';
+import { youtubeVideoAPI } from '~/modules/YoutubeVideo/service';
 
 import { ModalStackReducer } from './ModalStack';
 import { notificationsReducer } from './Notifications';
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   [storyArticleAPI.reducerPath]: storyArticleAPI.reducer,
   [vacancyAPI.reducerPath]: vacancyAPI.reducer,
   [mainPicturesAPI.reducerPath]: mainPicturesAPI.reducer,
+  [youtubeVideoAPI.reducerPath]: youtubeVideoAPI.reducer,
 });
 
 const appStore = configureStore({
@@ -64,6 +66,7 @@ const appStore = configureStore({
       storyArticleAPI.middleware,
       vacancyAPI.middleware,
       mainPicturesAPI.middleware,
+      youtubeVideoAPI.middleware,
     ),
 });
 

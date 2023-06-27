@@ -18,6 +18,7 @@ const userSchema = new Schema<IUser>(
     vacancies: [{ type: Schema.Types.ObjectId, ref: 'Vacancy' }],
     presentationFile: { type: Schema.Types.ObjectId, ref: 'PresentationFile' },
     mainPictures: [{ type: Schema.Types.ObjectId, ref: 'MainPicture' }],
+    youtubeVideos: [{ type: Schema.Types.ObjectId, ref: 'YoutubeVideo' }],
   },
   { timestamps: true },
 );

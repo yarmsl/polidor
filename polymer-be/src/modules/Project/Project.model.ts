@@ -11,6 +11,7 @@ const projectSchema = new Schema<IProject>(
     tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
     slug: { type: String, required: true, unique: true, index: true },
     order: { type: Number, default: 0 },
+    youtubeVideo: { type: Schema.Types.ObjectId, ref: 'YoutubeVideo' },
   },
   { timestamps: true },
 );

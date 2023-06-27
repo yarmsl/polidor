@@ -20,7 +20,7 @@ export const editStepController = async (req: Request, res: Response): Promise<v
         });
       }
 
-      await editingStep.updateOne({
+      await editingStep.update({
         title,
         order,
         content,

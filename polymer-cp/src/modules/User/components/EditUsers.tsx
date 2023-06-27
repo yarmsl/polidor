@@ -36,7 +36,7 @@ const EditUsers = (): JSX.Element => {
 
           <TableBody>
             {data?.map((user) => (
-              <UserItem key={user.id} user={user} />
+              <UserItem key={user._id} user={user} />
             ))}
           </TableBody>
         </Table>

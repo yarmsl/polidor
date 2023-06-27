@@ -26,7 +26,7 @@ import { useEditBottomBannerMutation, useGetBottomBannerQuery } from '../store';
 const ChooseBottomBanner = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { data: bottomBanners, isLoading: isBannersLoading } = useGetBottomBannerQuery('');
-  const { data: projects, isLoading: isProjectsLoading } = useGetAllProjectsQuery('');
+  const { data: projects, isLoading: isProjectsLoading } = useGetAllProjectsQuery();
   const [editBanner, { isLoading: isEditingLoading }] = useEditBottomBannerMutation();
 
   const { control, handleSubmit, setValue } = useForm<IEditBottomBanner>({

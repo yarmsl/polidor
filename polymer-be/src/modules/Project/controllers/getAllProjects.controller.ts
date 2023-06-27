@@ -25,6 +25,7 @@ export const getAllProjectsController = async (req: Request, res: Response) => {
           tags: project.tags,
           slug: project.slug,
           order: project.order,
+          youtubeVideo: project.youtubeVideo,
         };
       });
       res.status(200).json(projectsFE);

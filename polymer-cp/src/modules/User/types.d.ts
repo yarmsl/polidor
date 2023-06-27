@@ -5,7 +5,7 @@ interface IUserResponse extends IEditUserById {
 }
 
 interface IEditUserById extends IEditUser {
-  id: string;
+  _id: string;
 }
 
 interface IEditUser {

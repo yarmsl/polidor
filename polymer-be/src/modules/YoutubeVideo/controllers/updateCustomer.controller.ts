@@ -10,14 +10,19 @@ export const updateYoutubeVideoController = async (req: Request, res: Response) 
     const { title, embedId, autoplay, mute, isMain, projects } = req.body;
 
     if (isMain) {
-      const mainVideo = await YoutubeVideo.findOne({ isMain: true });
-      if (mainVideo && mainVideo._id !== videoId) await mainVideo.update({ isMain: false });
+      await YoutubeVideo.updateMany({ isMain: true }, { isMain: false });
     }
 
     if (Array.isArray(projects)) {
-      await Project.updateMany({ youtubeVideo: videoId }, { $pull: { youtubeVideo: videoId } });
+      await Project.updateMany({ youtubeVideo: videoId }, { youtubeVideo: null });
       if (projects.length)
-        await Project.updateMany({ _id: { $in: projects } }, { $push: { youtubeVideo: videoId } });
+        await Project.updateMany({ _id: { $in: projects } }, { youtubeVideo: videoId });
+      await YoutubeVideo.updateMany(
+        { projects: { $in: projects } },
+        {
+          $pullAll: { projects },
+        },
+      );
     }
 
     const editedVideo = await YoutubeVideo.findByIdAndUpdate(

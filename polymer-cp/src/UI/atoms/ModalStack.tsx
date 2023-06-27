@@ -13,7 +13,12 @@ const ModalStack = (): ReactElement => {
       {modalStack.length > 0 &&
         modalStack?.map((modal, i) => {
           return (
-            <Dialog key={i} open={modal.open} onClose={() => dispatch(closeModalAction())}>
+            <Dialog
+              key={i}
+              open={modal.open}
+              scroll='paper'
+              onClose={() => dispatch(closeModalAction())}
+            >
               {modal.window}
             </Dialog>
           );

@@ -27,7 +27,7 @@ const YouTubeBox: FC<IYouTubeBoxProps> = ({ embedId, autoplay, mute, title }) =>
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
         frameBorder='0'
         height={height}
-        src={`https://www.youtube.com/embed/__ioxJz4NAY?autoplay=${+autoplay}&mute=${+mute}`}
+        src={`https://www.youtube.com/embed/${embedId}?autoplay=${+autoplay}&mute=${+mute}`}
         title={title}
         width='100%'
         allowFullScreen

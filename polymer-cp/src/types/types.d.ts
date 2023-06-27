@@ -27,3 +27,12 @@ interface IMessage {
 }
 
 type TStyles = Record<string, import('@mui/material').SxProps>;
+
+interface IBase {
+  _id: string;
+  author: IUser;
+  createdAt: string;
+  updatedAt: string;
+}
+
+type TMuiTableProps = import('@mui/material').TableProps;

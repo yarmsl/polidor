@@ -21,7 +21,7 @@ const UserItem = ({ user }: IUserItemProps) => {
   const dispatch = useAppDispatch();
   const handleDeleteUser = useCallback(async () => {
     try {
-      const res = await removeUser({ id: user.id }).unwrap();
+      const res = await removeUser({ id: user._id }).unwrap();
       dispatch(showSuccessSnackbar(res.message || 'success'));
     } catch (e) {
       dispatch(showErrorSnackbar((e as IQueryError).data.message || 'fail'));

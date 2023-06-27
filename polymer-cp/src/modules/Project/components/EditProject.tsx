@@ -15,7 +15,7 @@ import ProjectItem from './ProjectItem';
 import { useGetAllProjectsQuery } from '../store';
 
 const EditProject = (): JSX.Element => {
-  const { data, isLoading } = useGetAllProjectsQuery('');
+  const { data, isLoading } = useGetAllProjectsQuery();
 
   return (
     <Container maxWidth='xl' sx={styles.root}>

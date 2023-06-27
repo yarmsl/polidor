@@ -1,6 +1,13 @@
 export const errorHandler = (error: unknown, message: string) => {
   if (error instanceof HttpError) return error;
-  if (error instanceof Error) return { ...error, statusCode: 500 };
+  if (error instanceof Error) {
+    if (error?.message) {
+      return { message: error.message, statusCode: 500 };
+    }
+
+    return { ...error, statusCode: 500 };
+  }
+
   return { message, statusCode: 500 };
 };
 

@@ -127,14 +127,16 @@ const ProjectItem = ({ project }: IProjectItemProps) => {
 const styles: TStyles = {
   textCell: {
     maxWidth: '150px',
+    maxHeight: '100px',
     width: '100%',
-    height: '100%',
+    height: '100px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   img: {
     width: 'calc(100% - 36px)',
+    height: '100%',
     minWidth: '80px',
     mr: '8px',
     '&:hover': {
@@ -142,6 +144,7 @@ const styles: TStyles = {
     },
     '& img': {
       width: '100%',
+      height: '100%',
       objectFit: 'contain',
       objectPosition: 'center',
     },

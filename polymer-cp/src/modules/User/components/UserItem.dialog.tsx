@@ -28,7 +28,7 @@ const UserItemDialog = ({ user }: IUserItemDialogProps): JSX.Element => {
   const { handleSubmit, control } = useForm<IEditUser>();
   const handleEditUser = handleSubmit(async (data) => {
     try {
-      const sendData = { id: user.id, ...data };
+      const sendData = { _id: user._id, ...data };
       const res = await editUser(sendData).unwrap();
       dispatch(showSuccessSnackbar(res.message || 'success'));
     } catch (e) {

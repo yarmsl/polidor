@@ -61,8 +61,15 @@ const Project: FC<IProjectProps> = ({ project }) => {
           <Typography variant='subtitle1'>Изображения взяты из открытых источников</Typography>
         </Box>
       )}
-      <YouTubeBox embedId='' title='' autoplay mute />
-      <Button color='primary' variant='contained' onClick={() => router.goBack()}>
+      {project?.youtubeVideo ? (
+        <YouTubeBox
+          autoplay={project.youtubeVideo.autoplay}
+          embedId={project.youtubeVideo.embedId}
+          mute={project.youtubeVideo.mute}
+          title={project.youtubeVideo.title}
+        />
+      ) : null}
+      <Button color='primary' sx={{ mt: 2 }} variant='contained' onClick={() => router.goBack()}>
         Вернуться назад
       </Button>
     </Container>

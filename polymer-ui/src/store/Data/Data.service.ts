@@ -88,6 +88,12 @@ export const dataAPI = createApi({
         method: 'GET',
       }),
     }),
+    getMainYoutubeVideo: build.query<IYoutubeVideo, void>({
+      query: () => ({
+        url: '/youtube_videos/main',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -105,4 +111,5 @@ export const {
   useSendFileToMailMutation,
   useFeedbackMutation,
   useGetMainPicturesQuery,
+  useGetMainYoutubeVideoQuery,
 } = dataAPI;

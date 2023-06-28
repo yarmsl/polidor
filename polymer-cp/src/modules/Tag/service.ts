@@ -2,21 +2,21 @@ import { controlPanelAPI } from '~/store/service';
 
 const tagAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
-    addTag: build.mutation<ITag, IAddTag>({
+    addTag: build.mutation<ITag, ITagDto>({
       query: (tagData) => ({
         url: '/tag',
         method: 'POST',
         body: tagData,
       }),
-      invalidatesTags: ['Tag', 'User'],
+      invalidatesTags: ['Tag', 'User', 'Project'],
     }),
-    editTag: build.mutation<ITag, IEditTag>({
-      query: (editTagData) => ({
-        url: `/tag/${editTagData.id}`,
+    editTag: build.mutation<ITag, IEdit<ITagDto>>({
+      query: ({ id, dto }) => ({
+        url: `/tag/${id}`,
         method: 'PUT',
-        body: editTagData.data,
+        body: dto,
       }),
-      invalidatesTags: ['Tag'],
+      invalidatesTags: ['Tag', 'Project'],
     }),
     deleteTag: build.mutation<IMessage, string>({
       query: (tagId) => ({
@@ -25,7 +25,7 @@ const tagAPI = controlPanelAPI.injectEndpoints({
       }),
       invalidatesTags: ['Tag', 'Project', 'User'],
     }),
-    getAllTags: build.query<ITagFull[], string>({
+    getAllTags: build.query<ITag[], void>({
       query: () => ({
         url: '/tag/cp',
         method: 'GET',

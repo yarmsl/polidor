@@ -17,7 +17,7 @@ import {
 
 import { SERVER_URL } from '~/lib/constants';
 import { file2optiDataurl, file2optiFile } from '~/lib/imageOptimaze';
-import { useGetAllTagsQuery } from '~/modules/Tag/store';
+import { useGetAllTagsQuery } from '~/modules/Tag/service';
 import { useAppDispatch } from '~/store';
 import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
@@ -46,7 +46,7 @@ const ProjectItemDialog = ({ project, edit }: IProjectDialogProps): JSX.Element 
   const dispatch = useAppDispatch();
   const [editProject, { isLoading }] = useEditProjectMutation();
   const { handleSubmit, control } = useForm<ISendProjectData>();
-  const { data: tags } = useGetAllTagsQuery('');
+  const { data: tags } = useGetAllTagsQuery();
   const { data: customers } = useGetAllCustomersQuery('');
   const [sources, serSources] = useState(project.images);
   const [files, setFiles] = useState<File[]>([]);

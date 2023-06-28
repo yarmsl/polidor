@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "install:all": "yarn install && cd ./polymer-be && yarn install && cd ../polymer-ui && yarn install && cd ../polymer-cp && yarn install",
-    "dev": "concurrently -p '[{name}]' -c 'bgGreen,bgCyan,green' -n 'polymer-server,polymer-ui,control-panel' 'cd ./polymer-be && yarn dev' 'cd ./polymer-ui && yarn dev' 'cd ./polymer-cp && yarn dev'",
+    "dev": "concurrently -p \"[{name}]\" -c \"bgGreen,bgCyan,green\" -n \"polymer-server,polymer-ui,control-panel\" \"yarn dev:be\" \"yarn dev:ui\" \"yarn dev:cp\"",
     "dev:db": "cd ./polymer-be && yarn dev:db",
     "dev:ui": "cd ./polymer-ui && yarn dev",
     "dev:cp": "cd ./polymer-cp && yarn dev",

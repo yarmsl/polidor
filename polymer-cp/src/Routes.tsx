@@ -52,7 +52,9 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
           <ControlPanelLayout>
             <Switch>
               <Route component={ControlPanel} path='/' exact />
-              {role === 'admin' && <Route component={UserManagment} path='/user_managment' exact />}
+              {['admin', 'dev'].includes(role) && (
+                <Route component={UserManagment} path='/user_managment' exact />
+              )}
               <Route component={Tags} path='/tags' exact />
               <Route component={CustomersCP} path='/customers' exact />
               <Route component={ProjectsCP} path='/projects' exact />

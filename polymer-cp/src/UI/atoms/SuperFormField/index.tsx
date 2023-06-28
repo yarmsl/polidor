@@ -13,6 +13,7 @@ const SuperFormField = <T,>({
   name,
   defaultValue,
   type,
+  rules,
   selectItems,
   ...rest
 }: ISuperFormFieldProps<T>) => {
@@ -27,6 +28,9 @@ const SuperFormField = <T,>({
           SelectProps={{ multiple: type === 'multiselect' }}
           error={!!error}
           helperText={error ? error.message : null}
+          maxRows={type === 'multiline' ? 8 : undefined}
+          minRows={type === 'multiline' ? 3 : undefined}
+          multiline={type === 'multiline'}
           select={type && ['select', 'multiselect'].includes(type)}
           value={value}
           onChange={onChange}
@@ -50,6 +54,7 @@ const SuperFormField = <T,>({
       )}
       rules={{
         required: rest.required ? 'Обязательное поле' : false,
+        ...rules,
       }}
       {...rest}
     />

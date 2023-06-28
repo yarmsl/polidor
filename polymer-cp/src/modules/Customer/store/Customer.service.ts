@@ -1,33 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const customerAPI = createApi({
-  reducerPath: 'customerAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/customer`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Customer'],
+const customerAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addCustomer: build.mutation<ICustomer, FormData>({
       query: (customerData) => ({
-        url: '/',
+        url: '/customer',
         method: 'POST',
         body: customerData,
       }),
-      invalidatesTags: ['Customer'],
+      invalidatesTags: ['Customer', 'User'],
     }),
     editCustomer: build.mutation<ICustomer, IEditCustomer>({
       query: (editCustomerData) => ({
-        url: `/${editCustomerData.id}`,
+        url: `/customer/${editCustomerData.id}`,
         method: 'PUT',
         body: editCustomerData.data,
       }),
@@ -35,14 +20,14 @@ export const customerAPI = createApi({
     }),
     deleteCustomer: build.mutation<IMessage, string>({
       query: (customerId) => ({
-        url: `/${customerId}`,
+        url: `/customer/${customerId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Customer'],
+      invalidatesTags: ['Customer', 'Project', 'User'],
     }),
     getAllCustomers: build.query<ICustomerFull[], string>({
       query: () => ({
-        url: '/cp',
+        url: '/customer/cp',
         method: 'GET',
       }),
       providesTags: ['Customer'],

@@ -7,7 +7,7 @@ import { User } from '../User.model';
 export const getUsersController = async (req: Request, res: Response) => {
   try {
     const users = await User.find();
-    if (!Array.isArray(users) || users.length) throw notFoundError();
+    if (!Array.isArray(users) || !users.length) throw notFoundError();
 
     return res.status(200).json(users);
   } catch (e) {

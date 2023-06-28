@@ -1,25 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const bannerAPI = createApi({
-  reducerPath: 'bannerAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/banner`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Banner', 'BottomBanner'],
+const bannerAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addBanner: build.mutation<IBanner, FormData>({
       query: (bannerData) => ({
-        url: '/',
+        url: '/banner',
         method: 'POST',
         body: bannerData,
       }),
@@ -27,7 +12,7 @@ export const bannerAPI = createApi({
     }),
     editBanner: build.mutation<IBanner, IEditBanner>({
       query: (editBannerData) => ({
-        url: `/${editBannerData.id}`,
+        url: `/banner/${editBannerData.id}`,
         method: 'PUT',
         body: editBannerData.data,
       }),
@@ -35,21 +20,21 @@ export const bannerAPI = createApi({
     }),
     deleteBanner: build.mutation<IMessage, string>({
       query: (bannerId) => ({
-        url: `/${bannerId}`,
+        url: `/banner/${bannerId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Banner'],
     }),
     getAllBanners: build.query<IBanner[], string>({
       query: () => ({
-        url: '/',
+        url: '/banner',
         method: 'GET',
       }),
       providesTags: ['Banner'],
     }),
     editBottomBanner: build.mutation<IMessage, IEditBottomBanner>({
       query: (editBottomBannerReq) => ({
-        url: '/bottom',
+        url: '/banner/bottom',
         method: 'POST',
         body: editBottomBannerReq,
       }),
@@ -57,7 +42,7 @@ export const bannerAPI = createApi({
     }),
     getBottomBanner: build.query<IBottomBanner, string>({
       query: () => ({
-        url: '/bottom',
+        url: '/banner/bottom',
         method: 'GET',
       }),
       providesTags: ['BottomBanner'],

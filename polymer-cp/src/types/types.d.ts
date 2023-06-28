@@ -36,3 +36,8 @@ interface IBase {
 }
 
 type TMuiTableProps = import('@mui/material').TableProps;
+
+interface IEdit<Dto> {
+  id: string;
+  dto: Dto;
+}

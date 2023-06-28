@@ -1,12 +1,14 @@
 import { batch } from 'react-redux';
 
-import { authAPI, resetAuth } from '.';
+import { controlPanelAPI } from '~/store/service';
+
+import { resetAuth } from '.';
 
 export const logout = () => {
   return (dispatch: (arg0: unknown) => void): void => {
     batch(() => {
       dispatch(resetAuth());
-      dispatch(authAPI.util.resetApiState());
+      dispatch(controlPanelAPI.util.resetApiState());
     });
   };
 };

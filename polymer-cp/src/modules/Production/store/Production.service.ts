@@ -1,33 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const productionAPI = createApi({
-  reducerPath: 'productionAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/production`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Production'],
+const productionAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addProductionArticle: build.mutation<IProductionArticleFull, IAddProductionArticle>({
       query: (data) => ({
-        url: '/article',
+        url: '/production/article',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Production'],
+      invalidatesTags: ['Production', 'User'],
     }),
     editProductionArticle: build.mutation<IProductionArticleFull, IEditProductionArticle>({
       query: (data) => ({
-        url: `/article/${data.id}`,
+        url: `/production/article/${data.id}`,
         method: 'PUT',
         body: data.data,
       }),
@@ -35,29 +20,29 @@ export const productionAPI = createApi({
     }),
     deleteProductionArticle: build.mutation<IMessage, string>({
       query: (id) => ({
-        url: `/article/${id}`,
+        url: `/production/article/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Production'],
+      invalidatesTags: ['Production', 'User'],
     }),
     getAllProductionArticles: build.query<IProductionArticleFull[], string>({
       query: () => ({
-        url: '/article/cp',
+        url: '/production/article/cp',
         method: 'GET',
       }),
       providesTags: ['Production'],
     }),
     addProductionStep: build.mutation<IStepFull, FormData>({
       query: (data) => ({
-        url: '/step',
+        url: '/production/step',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Production'],
+      invalidatesTags: ['Production', 'User'],
     }),
     editProductionStep: build.mutation<IStepFull, IEditStep>({
       query: (data) => ({
-        url: `/step/${data.id}`,
+        url: `/production/step/${data.id}`,
         method: 'PUT',
         body: data.data,
       }),
@@ -65,14 +50,14 @@ export const productionAPI = createApi({
     }),
     deleteProductionStep: build.mutation<IMessage, string>({
       query: (id) => ({
-        url: `/step/${id}`,
+        url: `/production/step/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Production'],
+      invalidatesTags: ['Production', 'User'],
     }),
     getAllSteps: build.query<IStepFull[], string>({
       query: () => ({
-        url: '/step/cp',
+        url: '/production/step/cp',
         method: 'GET',
       }),
       providesTags: ['Production'],

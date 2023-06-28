@@ -31,7 +31,7 @@ export const feedbackController = async (req: Request, res: Response) => {
 
     return res.status(200).json({ message: 'Мы обязательно свяжемся с Вами' });
   } catch (e) {
-    const { message, statusCode } = errorHandler(e, 'send e-mail error');
+    const { message, statusCode } = errorHandler(e, 'Ошибка отправки сообщения');
 
     return res.status(statusCode).json({ message });
   }

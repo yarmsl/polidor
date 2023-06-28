@@ -70,7 +70,7 @@ function CrudModule<T extends IBase, K extends FieldValues>({
   );
 
   return (
-    <Container maxWidth='lg' sx={styles.root} disableGutters>
+    <Container maxWidth='lg' sx={styles.root}>
       <SuperMenu onCreate={handleCreate} onRefresh={onRefresh} />
       <SuperTable
         config={tableConfig}

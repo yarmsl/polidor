@@ -18,7 +18,6 @@ const SuperForm = <T, Dto extends FieldValues>({
 
   const handleReset = useCallback(() => reset(defaultValues), [defaultValues, reset]);
   const handleSave = handleSubmit(async (data) => {
-    console.log(data);
     if (onSave) await onSave(data);
   });
 

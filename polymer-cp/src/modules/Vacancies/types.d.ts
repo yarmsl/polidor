@@ -1,26 +1,7 @@
-interface IVacancy extends IAddVacancy {
-  _id: string;
-}
+interface IVacancy extends IVacancyDto, IBase {}
 
-interface IAddVacancy {
+interface IVacancyDto {
   title: string;
   requirements: string;
   wage: number;
-}
-
-interface IVacancyFull extends IVacancy {
-  author: IUserResponse;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface IEditVacancy {
-  id: string;
-  data: ISendVacancy;
-}
-
-interface ISendVacancy {
-  title?: number;
-  requirements?: string;
-  wage?: string;
 }

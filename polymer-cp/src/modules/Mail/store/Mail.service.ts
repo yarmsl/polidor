@@ -1,25 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const mailAPI = createApi({
-  reducerPath: 'mailAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/mail`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Mail'],
+const mailAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addMails: build.mutation<IMessage, IAddMails>({
       query: (data) => ({
-        url: '/',
+        url: '/mail',
         method: 'POST',
         body: data,
       }),
@@ -27,28 +12,28 @@ export const mailAPI = createApi({
     }),
     sendFileToMail: build.mutation<IMessage, IWantFile>({
       query: (data) => ({
-        url: '/file',
+        url: '/mail/file',
         method: 'POST',
         body: data,
       }),
     }),
     feedback: build.mutation<IMessage, Ifeedback>({
       query: (data) => ({
-        url: '/feedback',
+        url: '/mail/feedback',
         method: 'POST',
         body: data,
       }),
     }),
-    deleteMails: build.mutation<IMessage, string>({
+    deleteMails: build.mutation<IMessage, void>({
       query: () => ({
-        url: '/',
+        url: '/mail',
         method: 'DELETE',
       }),
       invalidatesTags: ['Mail'],
     }),
-    getMails: build.query<IMails, string>({
+    getMails: build.query<IMails, void>({
       query: () => ({
-        url: '/cp',
+        url: '/mail/cp',
         method: 'GET',
       }),
       providesTags: ['Mail'],

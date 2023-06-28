@@ -2,24 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { articleAPI } from '~/modules/Articles/store';
-import { authReducer, authAPI } from '~/modules/Auth/store';
-import { bannerAPI } from '~/modules/Banners/store';
-import { customerAPI } from '~/modules/Customer/store';
-import { mailAPI } from '~/modules/Mail/store';
-import { mainPicturesAPI } from '~/modules/MainPictures/store/mainPictures.service';
-import { fileAPI } from '~/modules/PresentationFile/store';
-import { productionAPI } from '~/modules/Production/store';
-import { projectAPI } from '~/modules/Project/store';
-import { storyAPI } from '~/modules/Story/store';
-import { storyArticleAPI } from '~/modules/StoryArticle/store';
-import { tagAPI } from '~/modules/Tag/store';
-import { usersAPI } from '~/modules/User/store';
-import { vacancyAPI } from '~/modules/Vacancies/store';
-import { youtubeVideoAPI } from '~/modules/YoutubeVideo/service';
+import { authReducer } from '~/modules/Auth/store';
 
+import { rtkQueryErrorLogger } from './middlewares';
 import { ModalStackReducer } from './ModalStack';
 import { notificationsReducer } from './Notifications';
+import { controlPanelAPI } from './service';
 
 const authPersistConfig = {
   key: 'auth',
@@ -31,42 +19,15 @@ const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   notifications: notificationsReducer,
   modalStack: ModalStackReducer,
-  [authAPI.reducerPath]: authAPI.reducer,
-  [bannerAPI.reducerPath]: bannerAPI.reducer,
-  [usersAPI.reducerPath]: usersAPI.reducer,
-  [customerAPI.reducerPath]: customerAPI.reducer,
-  [tagAPI.reducerPath]: tagAPI.reducer,
-  [projectAPI.reducerPath]: projectAPI.reducer,
-  [mailAPI.reducerPath]: mailAPI.reducer,
-  [fileAPI.reducerPath]: fileAPI.reducer,
-  [articleAPI.reducerPath]: articleAPI.reducer,
-  [productionAPI.reducerPath]: productionAPI.reducer,
-  [storyAPI.reducerPath]: storyAPI.reducer,
-  [storyArticleAPI.reducerPath]: storyArticleAPI.reducer,
-  [vacancyAPI.reducerPath]: vacancyAPI.reducer,
-  [mainPicturesAPI.reducerPath]: mainPicturesAPI.reducer,
-  [youtubeVideoAPI.reducerPath]: youtubeVideoAPI.reducer,
+  [controlPanelAPI.reducerPath]: controlPanelAPI.reducer,
 });
 
 const appStore = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
-      authAPI.middleware,
-      bannerAPI.middleware,
-      usersAPI.middleware,
-      customerAPI.middleware,
-      tagAPI.middleware,
-      projectAPI.middleware,
-      mailAPI.middleware,
-      fileAPI.middleware,
-      articleAPI.middleware,
-      productionAPI.middleware,
-      storyAPI.middleware,
-      storyArticleAPI.middleware,
-      vacancyAPI.middleware,
-      mainPicturesAPI.middleware,
-      youtubeVideoAPI.middleware,
+      rtkQueryErrorLogger,
+      controlPanelAPI.middleware,
     ),
 });
 

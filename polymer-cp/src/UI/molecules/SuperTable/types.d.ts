@@ -11,7 +11,6 @@ interface ISuperTableConfig<T> {
   title: string;
   id: keyof T;
   type?: 'string' | 'number' | 'date' | 'boolean';
-  editable?: boolean;
   render?: (rowData: T) => React.ReactNode;
   ellipsis?: boolean;
 }

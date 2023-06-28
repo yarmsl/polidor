@@ -1,31 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const authAPI = createApi({
-  reducerPath: 'authAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/auth`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+const authAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     signIn: build.mutation<IUser, formSignIn>({
       query: (signData) => ({
-        url: '/signin',
+        url: '/auth/signin',
         method: 'POST',
         body: signData,
       }),
+      invalidatesTags: ['User'],
     }),
     checkAuth: build.query<IUser, string>({
       query: () => ({
-        url: '/',
+        url: '/auth',
       }),
     }),
   }),

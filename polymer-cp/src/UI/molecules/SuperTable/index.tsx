@@ -27,7 +27,7 @@ const SuperTable = <T extends IBase>({
 }: ISuperTableProps<T>) => {
   return (
     <TableContainer component={Paper}>
-      <Box>{isLoading && <LinearProgress color='success' />}</Box>
+      <Box sx={styles.loader}>{isLoading && <LinearProgress color='info' />}</Box>
       <Table {...rest}>
         <TableHead>
           <TableRow>
@@ -75,6 +75,12 @@ const SuperTable = <T extends IBase>({
       </Table>
     </TableContainer>
   );
+};
+
+const styles: TStyles = {
+  loader: {
+    height: '2px',
+  },
 };
 
 export default memo(SuperTable) as typeof SuperTable;

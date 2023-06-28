@@ -1,50 +1,33 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const youtubeVideoAPI = createApi({
-  reducerPath: 'youtubeVideoAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/youtube_videos`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['YoutubeVideo'],
+const youtubeVideoAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addYouTubeVideo: build.mutation<IYoutubeVideo, IYoutubeVideoDto>({
       query: (dto) => ({
-        url: '/',
+        url: '/youtube_videos',
         method: 'POST',
         body: dto,
       }),
-      invalidatesTags: ['YoutubeVideo'],
+      invalidatesTags: ['YoutubeVideo', 'Project', 'User'],
     }),
-    editYouTubeVideo: build.mutation<IYoutubeVideo, { id: string; dto: Partial<IYoutubeVideoDto> }>(
-      {
-        query: ({ id, dto }) => ({
-          url: `/${id}`,
-          method: 'PUT',
-          body: dto,
-        }),
-        invalidatesTags: ['YoutubeVideo'],
-      },
-    ),
+    editYouTubeVideo: build.mutation<IYoutubeVideo, IEdit<Partial<IYoutubeVideoDto>>>({
+      query: ({ id, dto }) => ({
+        url: `/youtube_videos/${id}`,
+        method: 'PUT',
+        body: dto,
+      }),
+      invalidatesTags: ['YoutubeVideo', 'Project'],
+    }),
     deleteYouTubeVideo: build.mutation<IMessage, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/youtube_videos/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['YoutubeVideo'],
+      invalidatesTags: ['YoutubeVideo', 'Project', 'User'],
     }),
     getAllYouTubeVideos: build.query<IYoutubeVideoFull[], void>({
       query: () => ({
-        url: '/',
+        url: '/youtube_videos',
         method: 'GET',
       }),
       providesTags: ['YoutubeVideo'],

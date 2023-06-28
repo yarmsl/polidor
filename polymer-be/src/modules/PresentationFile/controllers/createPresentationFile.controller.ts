@@ -3,13 +3,11 @@ import { existsSync, unlinkSync } from 'fs';
 import { Request, Response } from 'express';
 
 import { User } from '~/modules/User';
+import { errorHandler } from '~/utils/errorHandler';
 
 import { PresentationFile } from '../PresentationFile.model';
 
-export const createPresentationFileController = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+export const createPresentationFileController = async (req: Request, res: Response) => {
   try {
     const { userId } = req.body.user;
     const file = req.file != null ? req.file.path : '';
@@ -27,10 +25,9 @@ export const createPresentationFileController = async (
     await User.findByIdAndUpdate(userId, {
       presentationFile: newFile._id,
     });
-    res.status(201).json({ message: 'file uploaded successfully' });
-    return;
+    return res.status(201).json({ message: 'Файл успешно загружен' });
   } catch (e) {
-    res.status(500).json({ message: 'adding file error' });
-    return;
+    const { statusCode, message } = errorHandler(e, 'Ошибка загрузки файла');
+    return res.status(statusCode).json({ message });
   }
 };

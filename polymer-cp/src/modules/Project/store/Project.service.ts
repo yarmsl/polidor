@@ -1,48 +1,33 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const projectAPI = createApi({
-  reducerPath: 'projectAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/project`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Project'],
+const projectAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addProject: build.mutation<IProject, FormData>({
       query: (projectData) => ({
-        url: '/',
+        url: '/project',
         method: 'POST',
         body: projectData,
       }),
-      invalidatesTags: ['Project'],
+      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
     }),
     editProject: build.mutation<IProject, IEditProject>({
       query: (editTagData) => ({
-        url: `/${editTagData.id}`,
+        url: `/project/${editTagData.id}`,
         method: 'PUT',
         body: editTagData.data,
       }),
-      invalidatesTags: ['Project'],
+      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
     }),
     deleteProject: build.mutation<IMessage, string>({
       query: (projectId) => ({
-        url: `/${projectId}`,
+        url: `/project/${projectId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Project'],
+      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
     }),
     getAllProjects: build.query<IProjectFull[], void>({
       query: () => ({
-        url: '/cp',
+        url: '/project/cp',
         method: 'GET',
       }),
       providesTags: ['Project'],

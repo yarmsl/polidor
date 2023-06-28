@@ -50,7 +50,7 @@ const SuperCell = <T extends IBase>({
       </TableCell>
     );
 
-  return <TableCell>{`${rowData[id]}`}</TableCell>;
+  return <TableCell align={type === 'number' ? 'right' : undefined}>{`${rowData[id]}`}</TableCell>;
 };
 
 export default memo(SuperCell) as typeof SuperCell;

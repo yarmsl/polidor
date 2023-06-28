@@ -1,24 +1,6 @@
-interface IStoryArticle extends IAddStoryArticle {
-  _id: string;
-}
+interface IStoryArticle extends IBase, IStoryArticleDto {}
 
-interface IAddStoryArticle {
+interface IStoryArticleDto {
   title: string;
   content: string;
-}
-
-interface IStoryArticleFull extends IStoryArticle {
-  author: IUserResponse;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface IEditStoryArticle {
-  id: string;
-  data: ISendStoryArticle;
-}
-
-interface ISendStoryArticle {
-  title?: string;
-  content?: string;
 }

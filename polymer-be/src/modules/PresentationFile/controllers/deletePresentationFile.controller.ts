@@ -3,13 +3,11 @@ import { existsSync, unlinkSync } from 'fs';
 import { Request, Response } from 'express';
 
 import { User } from '~/modules/User';
+import { errorHandler } from '~/utils/errorHandler';
 
 import { PresentationFile } from '../PresentationFile.model';
 
-export const deletePresentationFileController = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+export const deletePresentationFileController = async (req: Request, res: Response) => {
   try {
     const { userId } = req.body.user;
     const oldFile = await PresentationFile.find();
@@ -23,10 +21,9 @@ export const deletePresentationFileController = async (
       }
     }
 
-    res.status(200).json({ message: 'file successfully removed' });
-    return;
+    return res.status(200).json({ message: 'Файл успешно удален' });
   } catch (e) {
-    res.status(500).json({ message: 'removing file error' });
-    return;
+    const { statusCode, message } = errorHandler(e, 'Ошибка при удалении файла');
+    return res.status(statusCode).json({ message });
   }
 };

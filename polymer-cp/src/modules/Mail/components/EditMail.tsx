@@ -10,13 +10,13 @@ import { useDeleteMailsMutation, useGetMailsQuery } from '../store';
 
 const EditMail = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { data } = useGetMailsQuery('');
+  const { data } = useGetMailsQuery();
   const [deleteMails, { isLoading }] = useDeleteMailsMutation();
 
   const removeMails = useCallback(async () => {
     try {
-      const res = await deleteMails('').unwrap();
-      dispatch(showSuccessSnackbar(res?.message || 'Адреса успешно удалён'));
+      const res = await deleteMails().unwrap();
+      dispatch(showSuccessSnackbar(res?.message || 'Адрес успешно удалён'));
     } catch (e) {
       dispatch(showErrorSnackbar((e as IQueryError)?.data?.message || 'fail'));
     }
@@ -24,7 +24,7 @@ const EditMail = (): JSX.Element => {
 
   return (
     <Container maxWidth='sm'>
-      {data != null && (
+      {data?.email ? (
         <Paper sx={styles.mails}>
           <Typography>Почта для рассылки: {data.email}</Typography>
           <Typography>Почта для обратной связи: {data.feedback}</Typography>
@@ -32,7 +32,7 @@ const EditMail = (): JSX.Element => {
             {isLoading ? <CircularProgress size={24} /> : <DeleteForeverRoundedIcon />}
           </IconButton>
         </Paper>
-      )}
+      ) : null}
     </Container>
   );
 };

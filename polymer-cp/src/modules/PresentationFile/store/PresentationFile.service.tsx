@@ -1,40 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const fileAPI = createApi({
-  reducerPath: 'fileAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/file`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['File'],
+const fileAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addFile: build.mutation<IMessage, FormData>({
       query: (data) => ({
-        url: '/',
+        url: '/file',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['File'],
+      invalidatesTags: ['File', 'User'],
     }),
     deleteFile: build.mutation<IMessage, string>({
       query: () => ({
-        url: '/',
+        url: '/file',
         method: 'DELETE',
       }),
-      invalidatesTags: ['File'],
+      invalidatesTags: ['File', 'User'],
     }),
     getFileInfo: build.query<IPresFileFull, string>({
       query: () => ({
-        url: '/cp',
+        url: '/file/cp',
         method: 'GET',
       }),
       providesTags: ['File'],

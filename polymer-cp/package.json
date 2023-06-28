@@ -17,8 +17,6 @@
     "react-hook-form": "^7.14.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
-    "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "vite-plugin-svgr": "^2.4.0"
   },

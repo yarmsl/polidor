@@ -41,7 +41,6 @@ export const createMailController = async (req: Request, res: Response) => {
       feedback,
       pass,
     });
-    await newMail.save();
 
     const confirmMessage = {
       from: email,
@@ -61,9 +60,11 @@ export const createMailController = async (req: Request, res: Response) => {
 
     await sendMail(provider, email, pass, confirmFeedbackMessage);
 
+    await newMail.save();
+
     return res.status(201).json({ message: 'Ожидайте подтверждения на указанных адресах' });
   } catch (e) {
-    const { message, statusCode } = errorHandler(e, 'adding message error');
+    const { message, statusCode } = errorHandler(e, 'Не удалось добавить почтовый ящик');
     return res.status(statusCode).json({ message });
   }
 };

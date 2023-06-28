@@ -1,34 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { controlPanelAPI } from '~/store/service';
 
-import { SERVER_URL } from '~/lib/constants';
-import { RootState } from '~/store';
-
-export const articleAPI = createApi({
-  reducerPath: 'articleAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${SERVER_URL}/api/article`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ['Article'],
+const articleAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
     addArticle: build.mutation<IArticleFull, FormData>({
       query: (data) => ({
-        url: '/',
+        url: '/article',
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Article'],
+      invalidatesTags: ['Article', 'User'],
     }),
 
     editArticle: build.mutation<IArticleFull, IEditArticle>({
       query: (data) => ({
-        url: `/${data.id}`,
+        url: `/article/${data.id}`,
         method: 'PUT',
         body: data.data,
       }),
@@ -36,14 +21,14 @@ export const articleAPI = createApi({
     }),
     deleteArticle: build.mutation<IMessage, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/article/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Article'],
+      invalidatesTags: ['Article', 'User'],
     }),
     getAllArticles: build.query<IArticleFull[], string>({
       query: () => ({
-        url: '/cp',
+        url: '/article/cp',
         method: 'GET',
       }),
       providesTags: ['Article'],

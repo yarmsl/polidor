@@ -17,9 +17,9 @@ const YoutubeVideo: FC = () => {
   const dispatch = useAppDispatch();
   const { tableConfig, formConfig, defaultValues } = useYoutubeVideoTableConf();
   const { data, isFetching, refetch } = useGetAllYouTubeVideosQuery();
-  const [createYoutubeVideo, { isLoading: isCreating }] = useAddYouTubeVideoMutation();
-  const [editYoutubeVideo, { isLoading: isEditing }] = useEditYouTubeVideoMutation();
-  const [deleteYoutubeVideo, { isLoading: isDeleting }] = useDeleteYouTubeVideoMutation();
+  const [onCreate, { isLoading: isCreating }] = useAddYouTubeVideoMutation();
+  const [onEdit, { isLoading: isEditing }] = useEditYouTubeVideoMutation();
+  const [onDelete, { isLoading: isDeleting }] = useDeleteYouTubeVideoMutation();
 
   const handleData2Dto = useCallback(
     (rowData: IYoutubeVideoFull): IYoutubeVideoDto => ({
@@ -32,40 +32,40 @@ const YoutubeVideo: FC = () => {
   const handleCreate = useCallback(
     async (data: IYoutubeVideoDto) => {
       try {
-        const res = await createYoutubeVideo(data).unwrap();
+        const res = await onCreate(data).unwrap();
         dispatch(showSuccessSnackbar(`Видео ${res.title} успешно добавлено`));
         dispatch(closeModalAction());
       } catch {
         dispatch(showErrorSnackbar('Ошибка при добавлении видео'));
       }
     },
-    [createYoutubeVideo, dispatch],
+    [onCreate, dispatch],
   );
 
   const handleEdit = useCallback(
     async (editData: IYoutubeVideoDto & { _id: string }) => {
       try {
         const { _id, ...dto } = editData;
-        const res = await editYoutubeVideo({ id: _id, dto }).unwrap();
+        const res = await onEdit({ id: _id, dto }).unwrap();
         dispatch(showSuccessSnackbar(`Видео ${res.title} успешно изменено`));
         dispatch(closeModalAction());
       } catch {
         dispatch(showErrorSnackbar('Ошибка при изменении видео'));
       }
     },
-    [dispatch, editYoutubeVideo],
+    [dispatch, onEdit],
   );
 
   const handleDelete = useCallback(
     async (data: IYoutubeVideoFull) => {
       try {
-        await deleteYoutubeVideo(data._id).unwrap();
+        await onDelete(data._id).unwrap();
         dispatch(showSuccessSnackbar(`Видео ${data.title} успешно удалено`));
       } catch {
         dispatch(showErrorSnackbar('Ошибка при удалении видео'));
       }
     },
-    [deleteYoutubeVideo, dispatch],
+    [onDelete, dispatch],
   );
 
   const isLoading = useMemo(

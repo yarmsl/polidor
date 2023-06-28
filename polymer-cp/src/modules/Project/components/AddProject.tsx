@@ -17,7 +17,7 @@ import {
 
 import { SERVER_URL } from '~/lib/constants';
 import { file2optiFile, file2optiDataurl } from '~/lib/imageOptimaze';
-import { useGetAllTagsQuery } from '~/modules/Tag/store';
+import { useGetAllTagsQuery } from '~/modules/Tag/service';
 import { useAppDispatch } from '~/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 import ImagesPreview from '~/UI/atoms/ImagesPreview';
@@ -46,7 +46,7 @@ const AddProject = (): JSX.Element => {
   });
   const [newProject, { isLoading }] = useAddProjectMutation();
   const { data: customers } = useGetAllCustomersQuery('');
-  const { data: tags } = useGetAllTagsQuery('');
+  const { data: tags } = useGetAllTagsQuery();
 
   const fileUpload = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {

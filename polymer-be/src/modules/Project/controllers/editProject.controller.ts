@@ -62,27 +62,11 @@ export const editProjectController = async (req: Request, res: Response) => {
       }
       if (Array.isArray(tags)) {
         await Tag.updateMany(
-          { projects: { $exists: editingProject._id } },
+          { projects: { $eq: editingProject._id } },
           { $pull: { projects: editingProject._id } },
         );
         if (tags.length)
           await Tag.updateMany({ _id: { $in: tags } }, { $push: { projects: editingProject._id } });
-
-        // @deprecated
-        // editingProject.tags?.forEach(async (tag) => {
-        //   if (!tags.includes(tag.toString())) {
-        //     await Tag.findByIdAndUpdate(tag, {
-        //       $pull: { projects: editingProject._id },
-        //     });
-        //   }
-        // });
-        // tags.forEach(async (tag) => {
-        //   if (!editingProject.tags.map((t) => t.toString()).includes(tag)) {
-        //     await Tag.findByIdAndUpdate(tag, {
-        //       $pull: { projects: editingProject._id },
-        //     });
-        //   }
-        // });
       }
 
       const result = await Project.findByIdAndUpdate(projectId, {

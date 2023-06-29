@@ -17,7 +17,7 @@ export const deleteTagController = async (req: Request, res: Response) => {
       });
 
       await Project.updateMany(
-        { tags: { $exists: removingTag._id } },
+        { tags: { $eq: removingTag._id } },
         { $pull: { tags: removingTag._id } },
       );
 

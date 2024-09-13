@@ -8,7 +8,7 @@ import { AppBar, Button, Container, IconButton } from '@mui/material';
 
 import Logo from '~/UI/atoms/Logo';
 
-import { pages } from './MainLayout';
+import { pages } from './MainLayout/consts';
 import { useMedia } from '../../lib/useMedia';
 import Loading from '../atoms/Loading';
 

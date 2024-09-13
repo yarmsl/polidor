@@ -8,7 +8,7 @@ import { JWT_SECRET } from '~/config/constants';
 import { User } from '~/modules/User';
 import { HttpError, errorHandler, notFoundError } from '~/utils/errorHandler';
 
-const token = (id: string, role: RoleTypes): string =>
+const token = (id: string, role: RoleTypes) =>
   jwt.sign({ userId: id, role }, JWT_SECRET, {
     expiresIn: '7d',
   });

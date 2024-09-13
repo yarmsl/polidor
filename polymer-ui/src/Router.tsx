@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import NotFound from './pages/404';
 import Loading from './UI/atoms/Loading';
+import { ScrollToTop } from './UI/atoms/ScrollToTop';
 import MainLayout from './UI/layouts/MainLayout';
 
 const About = lazy(() => import('./pages/AboutPage'));
@@ -14,7 +15,6 @@ const Production = lazy(() => import('./pages/ProductionPage'));
 const Project = lazy(() => import('./pages/ProjectPage'));
 const Projects = lazy(() => import('./pages/ProjectsPage'));
 const Tags = lazy(() => import('./pages/TagsPage'));
-const ScrollToTop = lazy(() => import('./UI/atoms/ScrollToTop'));
 
 const Router: FC = () => {
   return (

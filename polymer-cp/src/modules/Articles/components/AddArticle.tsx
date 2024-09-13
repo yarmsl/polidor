@@ -51,7 +51,7 @@ const AddArticle = (): JSX.Element => {
           e.target.value = '';
         }
         setUpLoading(false);
-      } catch (e) {
+      } catch {
         setUpLoading(false);
         dispatch(showErrorSnackbar('ошибка загрузки файлов'));
       }

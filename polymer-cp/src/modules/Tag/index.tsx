@@ -3,7 +3,7 @@ import { memo, FC, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '~/store';
 import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
-import CrudModule from '~/UI/organisms/CrudModule';
+import { CrudModule } from '~/UI/organisms/CrudModule';
 
 import {
   useAddTagMutation,

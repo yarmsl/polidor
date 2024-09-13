@@ -6,20 +6,10 @@ import { Container } from '@mui/material';
 import Loading from '~/UI/atoms/Loading';
 import MainBanner from '~/UI/molecules/MainBanner';
 
-import Header from './Header';
+import { pages } from './consts';
+import Header from '../Header';
 
-const Footer = lazy(() => import('./Footer'));
-
-export const pages = [
-  {
-    title: 'Промышленный дизайн и инжиниринг',
-    path: '/indastrial_design_and_engineering',
-  },
-  { title: 'Производство', path: '/production' },
-  { title: 'Проекты', path: '/projects' },
-  { title: 'О компании', path: '/about' },
-  { title: 'Контакты', path: '/contacts' },
-];
+const Footer = lazy(() => import('../Footer'));
 
 const MainLayout: FC<Child> = ({ children }) => {
   const match = useRouteMatch();

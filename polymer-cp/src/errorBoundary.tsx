@@ -18,12 +18,10 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true };
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public render() {
     if (this.state.hasError) {
       return (

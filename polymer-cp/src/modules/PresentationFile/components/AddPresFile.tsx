@@ -30,7 +30,7 @@ const AddPresFile = (): JSX.Element => {
           e.target.value = '';
         }
         setUpLoading(false);
-      } catch (e) {
+      } catch {
         setUpLoading(false);
         dispatch(showErrorSnackbar('ошибка загрузки файла'));
       }
@@ -67,7 +67,7 @@ const AddPresFile = (): JSX.Element => {
         <Paper sx={styles.preview}>
           <Typography variant='h6'>Имя: {file?.name || ''}</Typography>
           <Typography variant='h6'>
-            Размер: {file?.size ? `${(file.size / 1024 / 1024).toFixed(2)} Mb` : '' || ''}
+            Размер: {file?.size ? `${(file.size / 1024 / 1024).toFixed(2)} Mb` : ''}
           </Typography>
           <Typography variant='h6'>Тип: {file?.type || ''}</Typography>
         </Paper>

@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from '~/assets/LogoGrey.svg';
 import GetPresentationByEmail from '~/UI/atoms/GetPresentationByEmail';
 import FooterCarousel from '~/UI/molecules/FooterCarousel';
 
-import { pages } from './MainLayout';
+import { pages } from './MainLayout/consts';
 
 const Footer = (): JSX.Element => {
   const match = useRouteMatch();

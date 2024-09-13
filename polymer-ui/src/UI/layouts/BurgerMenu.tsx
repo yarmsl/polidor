@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 
 import { Box, Button, Divider, List, ListItemButton, SwipeableDrawer } from '@mui/material';
 
-import { pages } from './MainLayout';
+import { pages } from './MainLayout/consts';
 import { SERVER_URL } from '../../lib/constants';
 
 interface IBurgerMenuProps {

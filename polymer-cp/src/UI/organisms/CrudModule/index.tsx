@@ -1,14 +1,17 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { DeepPartial, FieldValues } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
+import { genericMemo } from '~/lib/constants';
 import { useAppDispatch } from '~/store';
 import { openModal } from '~/store/ModalStack';
 import SuperMenu from '~/UI/atoms/SuperMenu';
-import SuperForm from '~/UI/molecules/SuperForm';
-import SuperTable from '~/UI/molecules/SuperTable';
+import { SuperForm } from '~/UI/molecules/SuperForm';
+import { SuperTable } from '~/UI/molecules/SuperTable';
+
+import { styles } from './styles';
 
 interface ICrudModuleProps<T, K> {
   data: T[];
@@ -23,77 +26,64 @@ interface ICrudModuleProps<T, K> {
   onRefresh?: () => void;
 }
 
-function CrudModule<T extends IBase, K extends FieldValues>({
-  data,
-  isLoading,
-  tableConfig,
-  formConfig,
-  defaultValues,
-  handleData2Dto,
-  onRefresh,
-  onCreate,
-  onDelete,
-  onEdit,
-}: ICrudModuleProps<T, K>) {
-  const dispatch = useAppDispatch();
+export const CrudModule = genericMemo(
+  <T extends IBase, K extends FieldValues>({
+    data,
+    isLoading,
+    tableConfig,
+    formConfig,
+    defaultValues,
+    handleData2Dto,
+    onRefresh,
+    onCreate,
+    onDelete,
+    onEdit,
+  }: ICrudModuleProps<T, K>) => {
+    const dispatch = useAppDispatch();
 
-  const openFormModal = useCallback(
-    (
-      formConfig: ISuperFormConfig<K>[],
-      defaultValues: DeepPartial<K>,
-      onSave?: (data: K) => Promise<void>,
-    ) =>
-      dispatch(
-        openModal(
-          <Box sx={styles.formModal}>
-            <SuperForm config={formConfig} defaultValues={defaultValues} onSave={onSave} />
-          </Box>,
+    const openFormModal = useCallback(
+      (
+        formConfig: ISuperFormConfig<K>[],
+        defaultValues: DeepPartial<K>,
+        onSave?: (data: K) => Promise<void>,
+      ) =>
+        dispatch(
+          openModal(
+            <Box sx={styles.formModal}>
+              <SuperForm config={formConfig} defaultValues={defaultValues} onSave={onSave} />
+            </Box>,
+          ),
         ),
-      ),
-    [dispatch],
-  );
+      [dispatch],
+    );
 
-  const handleCreate = useCallback(
-    () => openFormModal(formConfig, defaultValues, onCreate),
-    [defaultValues, formConfig, onCreate, openFormModal],
-  );
+    const handleCreate = useCallback(
+      () => openFormModal(formConfig, defaultValues, onCreate),
+      [defaultValues, formConfig, onCreate, openFormModal],
+    );
 
-  const handleEdit = useCallback(
-    (rowData: T) => {
-      openFormModal(
-        formConfig,
-        handleData2Dto(rowData),
-        onEdit ? (data: K) => onEdit({ _id: rowData._id, ...data }) : undefined,
-      );
-    },
-    [formConfig, onEdit, handleData2Dto, openFormModal],
-  );
+    const handleEdit = useCallback(
+      (rowData: T) => {
+        openFormModal(
+          formConfig,
+          handleData2Dto(rowData),
+          onEdit ? (data: K) => onEdit({ _id: rowData._id, ...data }) : undefined,
+        );
+      },
+      [formConfig, onEdit, handleData2Dto, openFormModal],
+    );
 
-  return (
-    <Container maxWidth='lg' sx={styles.root}>
-      <SuperMenu onCreate={handleCreate} onRefresh={onRefresh} />
-      <SuperTable
-        config={tableConfig}
-        data={data || []}
-        isLoading={isLoading}
-        onDelete={onDelete}
-        onEdit={onEdit && handleEdit}
-      />
-    </Container>
-  );
-}
-
-const styles: TStyles = {
-  root: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    my: 0,
+    return (
+      <Container maxWidth='lg' sx={styles.root}>
+        <SuperMenu onCreate={handleCreate} onRefresh={onRefresh} />
+        <SuperTable
+          config={tableConfig}
+          data={data || []}
+          isLoading={isLoading}
+          onDelete={onDelete}
+          onEdit={onEdit && handleEdit}
+        />
+      </Container>
+    );
   },
-  formModal: {
-    width: '500px',
-    p: 4,
-  },
-};
-
-export default memo(CrudModule) as typeof CrudModule;
+);

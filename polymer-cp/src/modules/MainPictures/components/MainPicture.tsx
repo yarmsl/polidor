@@ -45,7 +45,7 @@ const MainPicture: FC<IMainPictureProps> = ({
           setPreview(prRes);
           e.target.value = '';
         }
-      } catch (e) {
+      } catch {
         dispatch(showErrorSnackbar('ошибка загрузки файла'));
       } finally {
         setUpLoading(false);

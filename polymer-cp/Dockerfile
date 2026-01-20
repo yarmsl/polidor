@@ -2,6 +2,6 @@ FROM node:16-alpine AS uibuilder
 WORKDIR /cp
 ADD package.json package.json
 ADD yarn.lock yarn.lock
-RUN yarn install --legacy-peer-deps
+RUN yarn install --ignore-engines
 ADD . .
 RUN yarn build

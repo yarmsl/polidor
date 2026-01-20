@@ -5,7 +5,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 
 import { SERVER_URL } from '~/lib/constants';
 import { useMedia } from '~/lib/useMedia';
-import YouTubeBox from '~/UI/atoms/YouTubeBox';
+import VideoBox from '~/UI/atoms/VideoBox';
 
 interface IProjectProps {
   project?: IProject;
@@ -62,7 +62,7 @@ const Project: FC<IProjectProps> = ({ project }) => {
         </Box>
       )}
       {project?.youtubeVideo ? (
-        <YouTubeBox
+        <VideoBox
           autoplay={project.youtubeVideo.autoplay}
           embedId={project.youtubeVideo.embedId}
           mute={project.youtubeVideo.mute}

@@ -5,6 +5,7 @@ import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSetting
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import AssignmentIndRoundedIcon from '@mui/icons-material/AssignmentIndRounded';
+import Camera from '@mui/icons-material/Camera';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import EngineeringRoundedIcon from '@mui/icons-material/EngineeringRounded';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
@@ -18,7 +19,6 @@ import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import TagIcon from '@mui/icons-material/Tag';
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   AppBar,
   Container,
@@ -111,9 +111,9 @@ const pages = [
     access: 'user',
   },
   {
-    title: 'Youtube',
+    title: 'Video',
     path: '/youtube_videos',
-    icon: <YouTubeIcon />,
+    icon: <Camera />,
     access: 'user',
   },
   {

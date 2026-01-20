@@ -8,7 +8,7 @@
     "build": "dotenv -e .env.production tsc",
     "start": "dotenv -e .env.development ts-node --files src/app.ts",
     "dev": "dotenv -e .env.development nodemon src/app.ts",
-    "dev:db": "docker-compose -f dev-docker-compose.yml up -d",
+    "dev:db": "docker compose -f dev-docker-compose.yml up -d",
     "prod": "dotenv -e .env.production node dist/app.js",
     "lint": "eslint src",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",

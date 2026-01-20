@@ -99,7 +99,7 @@ interface IMainPicture {
   tab: TMainPicturesTabs;
 }
 
-interface IYoutubeVideo {
+interface IVideo {
   createdAt: string;
   updatedAt: string;
   author: string;

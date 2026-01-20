@@ -738,6 +738,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kinescope/react-kinescope-player@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@kinescope/react-kinescope-player/-/react-kinescope-player-0.5.4.tgz#705258cbe2fb0d9dd7381402474844a4fee162a4"
+  integrity sha512-2IYyHqTV8DwKvhMOyO+CeOeS0D15eG21N0SB1qq9LwXsG+kccrEW/XBxhDGmRX15PamPLWiggmdljtmM06lp1A==
+
 "@mui/base@5.0.0-alpha.119":
   version "5.0.0-alpha.119"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.119.tgz#923e148ceb84898fdd28da069b7c42635053c128"

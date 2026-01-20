@@ -2,15 +2,15 @@ import { FC, memo } from 'react';
 
 import Box from '@mui/material/Box';
 
-import { useGetMainYoutubeVideoQuery } from '~/store/Data';
-import YouTubeBox from '~/UI/atoms/YouTubeBox';
+import { useGetMainVideoQuery } from '~/store/Data';
+import VideoBox from '~/UI/atoms/VideoBox';
 
 const MainVideo: FC = () => {
-  const { data } = useGetMainYoutubeVideoQuery();
+  const { data } = useGetMainVideoQuery();
   if (!data || !data?.embedId) return null;
   return (
     <Box sx={styles.root}>
-      <YouTubeBox
+      <VideoBox
         autoplay={data?.autoplay}
         embedId={data.embedId}
         mute={data?.mute}

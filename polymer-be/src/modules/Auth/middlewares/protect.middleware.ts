@@ -11,7 +11,7 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
 
     if (!user) throw unauthorizedError();
 
-    if (user.role !== 'admin') throw forbiddenError();
+    if (!['admin', 'dev'].includes(user.role)) throw forbiddenError();
 
     return next();
   } catch (e) {

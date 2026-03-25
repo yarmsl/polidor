@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 
 import { genericMemo } from '~/lib/constants';
 import { useAppDispatch } from '~/store';
-import { openModal } from '~/store/ModalStack';
+import { closeModalAction, openModal } from '~/store/ModalStack';
 import SuperMenu from '~/UI/atoms/SuperMenu';
 import { SuperForm } from '~/UI/molecules/SuperForm';
 import { SuperTable } from '~/UI/molecules/SuperTable';
@@ -41,6 +41,10 @@ export const CrudModule = genericMemo(
   }: ICrudModuleProps<T, K>) => {
     const dispatch = useAppDispatch();
 
+    const handleCloseModal = useCallback(() => {
+      dispatch(closeModalAction());
+    }, []);
+
     const openFormModal = useCallback(
       (
         formConfig: ISuperFormConfig<K>[],
@@ -50,7 +54,12 @@ export const CrudModule = genericMemo(
         dispatch(
           openModal(
             <Box sx={styles.formModal}>
-              <SuperForm config={formConfig} defaultValues={defaultValues} onSave={onSave} />
+              <SuperForm
+                config={formConfig}
+                defaultValues={defaultValues}
+                onClose={handleCloseModal}
+                onSave={onSave}
+              />
             </Box>,
           ),
         ),

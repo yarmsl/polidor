@@ -4,8 +4,8 @@ export const styles: TStyles = {
     alignItems: 'center',
   },
   listItemIcon: {
-    width: '56px',
-    height: '56px',
+    width: '36px',
+    height: '36px',
     borderRadius: 10,
     overflow: 'hidden',
     mr: 2,

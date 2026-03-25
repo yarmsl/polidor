@@ -15,6 +15,7 @@ export const SuperForm = genericMemo(
     defaultValues,
     config,
     size = 'medium',
+    onClose,
     onSave,
   }: ISuperFormProps<T, Dto>) => {
     const methods = useForm<Dto>({ defaultValues });
@@ -39,7 +40,10 @@ export const SuperForm = genericMemo(
           ))}
         </Box>
         <Box sx={styles.actions}>
-          <Button color='error' variant='contained' onClick={handleReset}>
+          <Button color='error' variant='outlined' onClick={onClose}>
+            Закрыть
+          </Button>
+          <Button color='warning' variant='contained' onClick={handleReset}>
             Очистить
           </Button>
           <Button color='info' variant='contained' onClick={handleSave}>

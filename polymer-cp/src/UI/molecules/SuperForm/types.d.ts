@@ -2,6 +2,7 @@ interface ISuperFormProps<T, Dto> {
   defaultValues?: import('react-hook-form').DeepPartial<Dto>;
   config: ISuperFormConfig<T>[];
   size?: 'small' | 'medium';
+  onClose: () => void;
   onSave?: (data: Dto) => Promise<void>;
 }
 

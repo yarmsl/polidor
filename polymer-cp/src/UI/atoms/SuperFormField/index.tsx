@@ -20,7 +20,6 @@ export const SuperFormField = genericMemo(
         name={name as string}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
-            SelectProps={{ multiple: type === 'multiselect' }}
             error={!!error}
             helperText={error ? error.message : null}
             maxRows={type === 'multiline' ? 8 : undefined}
@@ -28,6 +27,9 @@ export const SuperFormField = genericMemo(
             multiline={type === 'multiline'}
             select={type && ['select', 'multiselect'].includes(type)}
             value={value}
+            SelectProps={{
+              multiple: type === 'multiselect',
+            }}
             onChange={onChange}
             {...rest}
           >

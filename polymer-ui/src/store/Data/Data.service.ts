@@ -90,7 +90,7 @@ export const dataAPI = createApi({
     }),
     getMainVideo: build.query<IVideo, void>({
       query: () => ({
-        url: '/youtube_videos/main',
+        url: '/videos/main',
         method: 'GET',
       }),
     }),

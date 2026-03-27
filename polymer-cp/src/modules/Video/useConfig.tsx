@@ -5,7 +5,7 @@ import { SERVER_URL, UI_URL } from '~/lib/constants';
 import { useGetAllProjectsQuery } from '~/modules/Project/store';
 import ListCell from '~/UI/atoms/ListCell';
 
-export const useYoutubeVideoTableConf = () => {
+export const useVideoTableConf = () => {
   const getProjectsListData = useCallback(
     (projects: IProject[]) =>
       projects?.map((project) => ({
@@ -28,7 +28,7 @@ export const useYoutubeVideoTableConf = () => {
     [projects],
   );
 
-  const tableConfig: ISuperTableConfig<IYoutubeVideoFull>[] = useMemo(
+  const tableConfig: ISuperTableConfig<IVideoFull>[] = useMemo(
     () => [
       {
         id: 'title',
@@ -64,7 +64,7 @@ export const useYoutubeVideoTableConf = () => {
     [getProjectsListData],
   );
 
-  const formConfig: ISuperFormConfig<IYoutubeVideoDto>[] = useMemo(
+  const formConfig: ISuperFormConfig<IVideoDto>[] = useMemo(
     () => [
       { name: 'title', required: true, label: 'Название', defaultValue: '' },
       { name: 'embedId', required: true, label: 'Id видео', defaultValue: '' },
@@ -82,9 +82,14 @@ export const useYoutubeVideoTableConf = () => {
     [projectsItems],
   );
 
-  const defaultValues = formConfig.map(({ name, defaultValue }) => ({
-    [name]: defaultValue,
-  })) as DeepPartial<IYoutubeVideoDto>;
+  const defaultValues = formConfig.reduce<DeepPartial<IVideoDto>>(
+    (result, { name, defaultValue }) => {
+      (result as any)[String(name)] = defaultValue;
+
+      return result;
+    },
+    {} as DeepPartial<IVideoDto>,
+  );
 
   return { tableConfig, formConfig, defaultValues };
 };

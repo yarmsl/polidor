@@ -112,7 +112,7 @@ const pages = [
   },
   {
     title: 'Video',
-    path: '/youtube_videos',
+    path: '/videos',
     icon: <Camera />,
     access: 'user',
   },

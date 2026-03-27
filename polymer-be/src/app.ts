@@ -21,7 +21,7 @@ import StoryArticle from '~/modules/StoryArticle';
 import Tag from '~/modules/Tag';
 import User from '~/modules/User';
 import Vacancy from '~/modules/Vacancy';
-import YoutubeVideo from '~/modules/YoutubeVideo';
+import Video from '~/modules/Video';
 
 const corsOptions = {
   origin: SCOPE_HOST,
@@ -52,7 +52,7 @@ app.use('/api/story', Story);
 app.use('/api/storyarticle', StoryArticle);
 app.use('/api/vacancy', Vacancy);
 app.use('/api/main_pictures', MainPictures);
-app.use('/api/youtube_videos', YoutubeVideo);
+app.use('/api/videos', Video);
 
 const start = async () => {
   mongoose.set('strictQuery', false);

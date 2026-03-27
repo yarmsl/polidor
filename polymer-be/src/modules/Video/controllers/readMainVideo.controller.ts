@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 
 import { errorHandler } from '~/utils/errorHandler';
 
-import { YoutubeVideo } from '../YoutubeVideo.model';
+import { Video } from '../Video.model';
 
-export const readMainYouTubeVideosController = async (req: Request, res: Response) => {
+export const readMainVideosController = async (req: Request, res: Response) => {
   try {
-    const video = await YoutubeVideo.findOne({ isMain: true });
+    const video = await Video.findOne({ isMain: true });
 
     const result = {
       embedId: video?.embedId,

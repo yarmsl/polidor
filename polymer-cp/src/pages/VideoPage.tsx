@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import YoutubeVideo from '~/modules/YoutubeVideo';
+import Video from '~/modules/Video';
 import ControlPanelPage from '~/UI/layouts/ControlPanelPage';
 
-const YoutubeVideoPage: FC = () => {
+const VideoPage: FC = () => {
   return (
     <ControlPanelPage title='Youtube'>
-      <YoutubeVideo />
+      <Video />
     </ControlPanelPage>
   );
 };
 
-export default YoutubeVideoPage;
+export default VideoPage;

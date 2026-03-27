@@ -16,7 +16,7 @@ interface IProject {
   tags: ITag[];
   slug: string;
   order: number;
-  youtubeVideo: IYoutubeVideo | null;
+  youtubeVideo: IVideo | null;
 }
 
 interface ICustomer {

@@ -11,11 +11,11 @@ import {
   useEditTagMutation,
   useGetAllTagsQuery,
 } from './service';
-import { useYoutubeVideoTableConf } from './useConfig';
+import { useVideoTableConf } from './useConfig';
 
 const Tag: FC = () => {
   const dispatch = useAppDispatch();
-  const { tableConfig, formConfig, defaultValues } = useYoutubeVideoTableConf();
+  const { tableConfig, formConfig, defaultValues } = useVideoTableConf();
   const { data, isFetching, refetch } = useGetAllTagsQuery();
   const [onCreate, { isLoading: isCreating }] = useAddTagMutation();
   const [onEdit, { isLoading: isEditing }] = useEditTagMutation();

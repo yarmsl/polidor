@@ -1,4 +1,4 @@
-interface IYoutubeVideo extends TDocument {
+interface IVideo extends TDocument {
   createdAt: Date;
   updatedAt: Date;
   author: TObjectId;

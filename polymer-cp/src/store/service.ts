@@ -16,7 +16,7 @@ export const controlPanelAPI = createApi({
     },
   }),
   tagTypes: [
-    'YoutubeVideo',
+    'Video',
     'Project',
     'User',
     'Article',

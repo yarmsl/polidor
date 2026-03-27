@@ -6,7 +6,7 @@ import { onlyDigits } from '~/lib/rules/pattern';
 import { useGetAllProjectsQuery } from '~/modules/Project/store';
 import ListCell from '~/UI/atoms/ListCell';
 
-export const useYoutubeVideoTableConf = () => {
+export const useVideoTableConf = () => {
   const getProjectsListData = useCallback(
     (projects: IProject[]) =>
       projects?.map((project) => ({
@@ -80,9 +80,14 @@ export const useYoutubeVideoTableConf = () => {
     [projectsItems],
   );
 
-  const defaultValues = formConfig.map(({ name, defaultValue }) => ({
-    [name]: defaultValue,
-  })) as DeepPartial<ITagDto>;
+  const defaultValues = formConfig.reduce<DeepPartial<ITagDto>>(
+    (result, { name, defaultValue }) => {
+      (result as any)[String(name)] = defaultValue;
+
+      return result;
+    },
+    {} as DeepPartial<ITagDto>,
+  );
 
   return { tableConfig, formConfig, defaultValues };
 };

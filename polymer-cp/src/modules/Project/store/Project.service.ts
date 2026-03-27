@@ -8,7 +8,7 @@ const projectAPI = controlPanelAPI.injectEndpoints({
         method: 'POST',
         body: projectData,
       }),
-      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
+      invalidatesTags: ['Project', 'Video', 'Customer', 'User', 'Tag'],
     }),
     editProject: build.mutation<IProject, IEditProject>({
       query: (editTagData) => ({
@@ -16,14 +16,14 @@ const projectAPI = controlPanelAPI.injectEndpoints({
         method: 'PUT',
         body: editTagData.data,
       }),
-      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
+      invalidatesTags: ['Project', 'Video', 'Customer', 'User', 'Tag'],
     }),
     deleteProject: build.mutation<IMessage, string>({
       query: (projectId) => ({
         url: `/project/${projectId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Project', 'YoutubeVideo', 'Customer', 'User', 'Tag'],
+      invalidatesTags: ['Project', 'Video', 'Customer', 'User', 'Tag'],
     }),
     getAllProjects: build.query<IProjectFull[], void>({
       query: () => ({

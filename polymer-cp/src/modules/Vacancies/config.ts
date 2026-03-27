@@ -45,6 +45,11 @@ export const formConfig: ISuperFormConfig<IVacancyDto>[] = [
   },
 ];
 
-export const defaultValues = formConfig.map(({ name, defaultValue }) => ({
-  [name]: defaultValue,
-})) as DeepPartial<IVacancyDto>;
+export const defaultValues = formConfig.reduce<DeepPartial<IVacancyDto>>(
+  (result, { name, defaultValue }) => {
+    (result as any)[String(name)] = defaultValue;
+
+    return result;
+  },
+  {} as DeepPartial<IVacancyDto>,
+);

@@ -17,6 +17,9 @@ const Footer = (): JSX.Element => {
       <Container maxWidth='md' sx={styles.footer}>
         <Box sx={styles.main}>
           <Box sx={styles.nav}>
+            <Link href='https://disk.yandex.ru/i/5dtqnkst1twBhw' sx={styles.link} target='_blank'>
+              Политика в отношении персональных данных
+            </Link>
             {pages.map((page, i) => (
               <Link key={i} component={RouterLink} sx={styles.link} to={page.path}>
                 {page.title}
@@ -45,7 +48,7 @@ const styles: TStyles = {
   footer: {
     pt: { xs: '25px', sm: '' },
     width: '100%',
-    height: { xs: '380px', sm: '340px' },
+    height: { xs: '400px', sm: '340px' },
     display: 'flex',
     flexDirection: { xs: 'column', sm: 'row' },
     alignItems: 'center',

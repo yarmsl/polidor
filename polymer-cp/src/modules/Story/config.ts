@@ -49,6 +49,11 @@ export const formConfig: ISuperFormConfig<IStoryDto>[] = [
   },
 ];
 
-export const defaultValues = formConfig.map(({ name, defaultValue }) => ({
-  [name]: defaultValue,
-})) as DeepPartial<IStoryDto>;
+export const defaultValues = formConfig.reduce<DeepPartial<IStoryDto>>(
+  (result, { name, defaultValue }) => {
+    (result as any)[String(name)] = defaultValue;
+
+    return result;
+  },
+  {} as DeepPartial<IStoryDto>,
+);

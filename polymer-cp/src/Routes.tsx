@@ -18,7 +18,7 @@ import StoryCP from './pages/StoryCP';
 import Tags from './pages/Tags';
 import UserManagment from './pages/UserManagment';
 import VacancyCP from './pages/VacancyCP';
-import YoutubeVideoPage from './pages/YoutubeVideoPage';
+import VideoPage from './pages/VideoPage';
 
 interface IRoutesProps {
   isAuth: boolean;
@@ -44,7 +44,7 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
           '/story_articles',
           '/vacancies',
           '/main_pictures',
-          '/youtube_videos',
+          '/videos',
         ]}
         exact
       >
@@ -67,7 +67,7 @@ const Routes: FC<IRoutesProps> = ({ isAuth, role }) => {
               <Route component={StoryArticleCP} path='/story_articles' exact />
               <Route component={VacancyCP} path='/vacancies' exact />
               <Route component={MainPicturesPage} path='/main_pictures' exact />
-              <Route component={YoutubeVideoPage} path='/youtube_videos' exact />
+              <Route component={VideoPage} path='/videos' exact />
             </Switch>
           </ControlPanelLayout>
         ) : (

@@ -11,18 +11,18 @@ import {
   useEditYouTubeVideoMutation,
   useGetAllYouTubeVideosQuery,
 } from './service';
-import { useYoutubeVideoTableConf } from './useConfig';
+import { useVideoTableConf } from './useConfig';
 
-const YoutubeVideo: FC = () => {
+const Video: FC = () => {
   const dispatch = useAppDispatch();
-  const { tableConfig, formConfig, defaultValues } = useYoutubeVideoTableConf();
+  const { tableConfig, formConfig, defaultValues } = useVideoTableConf();
   const { data, isFetching, refetch } = useGetAllYouTubeVideosQuery();
   const [onCreate, { isLoading: isCreating }] = useAddYouTubeVideoMutation();
   const [onEdit, { isLoading: isEditing }] = useEditYouTubeVideoMutation();
   const [onDelete, { isLoading: isDeleting }] = useDeleteYouTubeVideoMutation();
 
   const handleData2Dto = useCallback(
-    (rowData: IYoutubeVideoFull): IYoutubeVideoDto => ({
+    (rowData: IVideoFull): IVideoDto => ({
       ...rowData,
       projects: rowData.projects?.map((project) => project._id),
     }),
@@ -30,7 +30,7 @@ const YoutubeVideo: FC = () => {
   );
 
   const handleCreate = useCallback(
-    async (data: IYoutubeVideoDto) => {
+    async (data: IVideoDto) => {
       try {
         const res = await onCreate(data).unwrap();
         dispatch(showSuccessSnackbar(`Видео ${res.title} успешно добавлено`));
@@ -43,7 +43,7 @@ const YoutubeVideo: FC = () => {
   );
 
   const handleEdit = useCallback(
-    async (editData: IYoutubeVideoDto & { _id: string }) => {
+    async (editData: IVideoDto & { _id: string }) => {
       try {
         const { _id, ...dto } = editData;
         const res = await onEdit({ id: _id, dto }).unwrap();
@@ -57,7 +57,7 @@ const YoutubeVideo: FC = () => {
   );
 
   const handleDelete = useCallback(
-    async (data: IYoutubeVideoFull) => {
+    async (data: IVideoFull) => {
       try {
         await onDelete(data._id).unwrap();
         dispatch(showSuccessSnackbar(`Видео ${data.title} успешно удалено`));
@@ -89,4 +89,4 @@ const YoutubeVideo: FC = () => {
   );
 };
 
-export default memo(YoutubeVideo);
+export default memo(Video);

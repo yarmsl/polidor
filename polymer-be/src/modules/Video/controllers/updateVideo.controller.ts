@@ -14,8 +14,9 @@ export const updateVideoController = async (req: Request, res: Response) => {
     }
 
     if (Array.isArray(projects)) {
-      await Project.updateMany({ video: videoId }, { video: null });
-      if (projects.length) await Project.updateMany({ _id: { $in: projects } }, { video: videoId });
+      await Project.updateMany({ youtubeVideo: videoId }, { video: null });
+      if (projects.length)
+        await Project.updateMany({ _id: { $in: projects } }, { youtubeVideo: videoId });
       await Video.updateMany(
         { projects: { $in: projects } },
         {

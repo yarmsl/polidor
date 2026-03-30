@@ -12,10 +12,10 @@ export const deleteVideoController = async (req: Request, res: Response) => {
     const removingVideo = await Video.findById(videoId);
     if (removingVideo) {
       await User.findByIdAndUpdate(removingVideo.author, {
-        $pull: { videos: removingVideo._id },
+        $pull: { youtubeVideos: removingVideo._id },
       });
 
-      await Project.updateMany({ video: removingVideo._id }, { video: null });
+      await Project.updateMany({ youtubeVideo: removingVideo._id }, { video: null });
 
       await removingVideo.delete();
       return res.status(200).json({ message: 'video successfully removed' });

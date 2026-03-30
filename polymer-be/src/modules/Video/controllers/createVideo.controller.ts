@@ -34,7 +34,7 @@ export const createVideoController = async (req: Request, res: Response) => {
       await Project.updateMany(
         { _id: { $in: projects } },
         {
-          video: video._id,
+          youtubeVideo: video._id,
         },
       );
 

@@ -9,8 +9,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: up-dev
       MONGO_INITDB_ROOT_PASSWORD: upmongo3434
-    volumes: # <--- ДОБАВЛЕНО
-      - mongo_data:/data/db # <--- ДОБАВЛЕНО
+    volumes:
+      - mongo_data:/data/db
     networks:
       - pldr_network
   mongo-express:
@@ -57,6 +57,7 @@ services:
       - ./nginx/log:/var/log/nginx
       - polymer_uibuild:/usr/share/nginx/html/ui
       - polymer_cpbuild:/usr/share/nginx/html/cp
+      - polymer_volume:/usr/share/nginx/html/uploads
     ports:
       - "80:80"
       - "443:443"

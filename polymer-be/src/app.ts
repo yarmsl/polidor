@@ -36,7 +36,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use('/uploads', express.static('uploads', { maxAge: 1296000000 }));
+// app.use('/uploads', express.static('uploads', { maxAge: 1296000000 }));
 
 app.use('/api/auth', Auth);
 app.use('/api/user', User);

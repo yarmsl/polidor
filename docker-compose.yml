@@ -9,6 +9,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: up-dev
       MONGO_INITDB_ROOT_PASSWORD: upmongo3434
+    volumes: # <--- ДОБАВЛЕНО
+      - mongo_data:/data/db # <--- ДОБАВЛЕНО
     networks:
       - pldr_network
   mongo-express:
@@ -72,6 +74,7 @@ volumes:
   polymer_volume:
   polymer_uibuild:
   polymer_cpbuild:
+  mongo_data:
 networks:
   pldr_network:
     driver: bridge

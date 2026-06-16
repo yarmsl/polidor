@@ -26,25 +26,10 @@ export const createVideoController = async (req: Request, res: Response) => {
       $push: { videos: video._id },
     });
 
-    if (isMain) {
-      await Video.updateMany({ isMain: true }, { isMain: false });
+    if (Array.isArray(projects) && projects.length) {
+      await Project.updateMany({ _id: { $in: projects } }, { $addToSet: { videos: video._id } });
     }
 
-    if (Array.isArray(projects) && projects?.length) {
-      await Project.updateMany(
-        { _id: { $in: projects } },
-        {
-          youtubeVideo: video._id,
-        },
-      );
-
-      await Video.updateMany(
-        { projects: { $in: projects } },
-        {
-          $pullAll: { projects },
-        },
-      );
-    }
     await video.save();
 
     return res.status(201).json(video);

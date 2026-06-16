@@ -10,5 +10,5 @@ interface IProject extends TDocument {
   images: string[];
   tags: TObjectId[];
   order: number;
-  youtubeVideo: TObjectId;
+  videos: TObjectId[];
 }

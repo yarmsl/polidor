@@ -12,7 +12,7 @@ export const addProjectController = async (req: Request, res: Response) => {
     const { userId } = req.body.user;
     const images =
       req.files != null ? (req.files as Express.Multer.File[]).map((file) => file.path) : [];
-    const { title, year, done, customer, tags, slug, order, video } = req.body;
+    const { title, year, done, customer, tags, slug, order, videos } = req.body;
     const arrTags = Array.isArray(tags) ? tags : tags != null ? [tags] : [];
     const projectExist = await Project.findOne({ slug });
     if (projectExist) {
@@ -29,19 +29,24 @@ export const addProjectController = async (req: Request, res: Response) => {
       tags: arrTags,
       slug,
       order,
-      video,
+      videos,
     });
     await newProject.save();
+
     await Customer.findByIdAndUpdate(customer, {
       $push: { projects: newProject._id },
     });
+
     arrTags?.forEach(async (tag: string) => {
       await Tag.findByIdAndUpdate(tag, { $push: { projects: newProject._id } });
     });
+
     await User.findByIdAndUpdate(req.body.user.userId, {
       $push: { projects: newProject._id },
     });
-    if (video) await Video.findByIdAndUpdate(video, { $push: { projects: newProject._id } });
+
+    if (videos) await Video.findByIdAndUpdate(videos, { $push: { projects: newProject._id } });
+
     return res.status(201).json(newProject);
   } catch (e) {
     return res.status(500).json({ message: 'adding project error' });

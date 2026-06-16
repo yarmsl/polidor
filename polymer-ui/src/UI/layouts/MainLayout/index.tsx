@@ -15,9 +15,12 @@ const MainLayout: FC<Child> = ({ children }) => {
   const match = useRouteMatch();
   const showBanner = useMemo(
     () =>
-      ['/', ...pages.map((page) => page.path).filter((path) => path !== '/contacts')].includes(
-        match.path,
-      ) && match.isExact,
+      [
+        '/',
+        ...pages
+          .map((page) => page.path)
+          .filter((path) => !['/contacts', '/videos'].includes(path)),
+      ].includes(match.path) && match.isExact,
     [match],
   );
   return (

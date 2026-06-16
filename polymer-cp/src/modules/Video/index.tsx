@@ -6,20 +6,20 @@ import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 import { CrudModule } from '~/UI/organisms/CrudModule';
 
 import {
-  useAddYouTubeVideoMutation,
-  useDeleteYouTubeVideoMutation,
-  useEditYouTubeVideoMutation,
-  useGetAllYouTubeVideosQuery,
+  useAddVideoMutation,
+  useDeleteVideoMutation,
+  useEditVideoMutation,
+  useGetAllVideosQuery,
 } from './service';
 import { useVideoTableConf } from './useConfig';
 
 const Video: FC = () => {
   const dispatch = useAppDispatch();
   const { tableConfig, formConfig, defaultValues } = useVideoTableConf();
-  const { data, isFetching, refetch } = useGetAllYouTubeVideosQuery();
-  const [onCreate, { isLoading: isCreating }] = useAddYouTubeVideoMutation();
-  const [onEdit, { isLoading: isEditing }] = useEditYouTubeVideoMutation();
-  const [onDelete, { isLoading: isDeleting }] = useDeleteYouTubeVideoMutation();
+  const { data, isFetching, refetch } = useGetAllVideosQuery();
+  const [onCreate, { isLoading: isCreating }] = useAddVideoMutation();
+  const [onEdit, { isLoading: isEditing }] = useEditVideoMutation();
+  const [onDelete, { isLoading: isDeleting }] = useDeleteVideoMutation();
 
   const handleData2Dto = useCallback(
     (rowData: IVideoFull): IVideoDto => ({

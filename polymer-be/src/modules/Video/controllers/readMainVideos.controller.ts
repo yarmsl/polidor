@@ -6,18 +6,18 @@ import { Video } from '../Video.model';
 
 export const readMainVideosController = async (req: Request, res: Response) => {
   try {
-    const video = await Video.findOne({ isMain: true });
+    const videos = await Video.find({ isMain: true });
 
-    const result = {
-      embedId: video?.embedId,
-      title: video?.title,
-      autoplay: video?.autoplay,
-      mute: video?.mute,
-    };
+    const result = videos?.map(({ embedId, title, autoplay, mute }) => ({
+      embedId,
+      title,
+      autoplay,
+      mute,
+    }));
 
     return res.status(200).json(result);
   } catch (e) {
-    const { statusCode, message } = errorHandler(e, 'Getting main video error');
+    const { statusCode, message } = errorHandler(e, 'Getting main videos error');
     return res.status(statusCode).json({ message });
   }
 };

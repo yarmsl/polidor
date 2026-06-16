@@ -5,7 +5,7 @@ services:
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - 127.0.0.1:27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: up-dev
       MONGO_INITDB_ROOT_PASSWORD: upmongo3434
@@ -15,7 +15,7 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - 127.0.0.1:8081:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: up-dev
       ME_CONFIG_MONGODB_ADMINPASSWORD: upmongo3434

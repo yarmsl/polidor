@@ -12,12 +12,16 @@ export const deleteVideoController = async (req: Request, res: Response) => {
     const removingVideo = await Video.findById(videoId);
     if (removingVideo) {
       await User.findByIdAndUpdate(removingVideo.author, {
-        $pull: { youtubeVideos: removingVideo._id },
+        $pull: { videos: removingVideo._id },
       });
 
-      await Project.updateMany({ youtubeVideo: removingVideo._id }, { video: null });
+      await Project.updateMany(
+        { _id: { $in: removingVideo.projects } },
+        { $pull: { videos: removingVideo._id } },
+      );
 
       await removingVideo.delete();
+
       return res.status(200).json({ message: 'video successfully removed' });
     } else {
       throw notFoundError('video not found');

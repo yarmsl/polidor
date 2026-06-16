@@ -32,7 +32,7 @@ export const useVideoTableConf = () => {
     () => [
       {
         id: 'title',
-        title: 'Название',
+        title: 'Заголовок',
       },
       {
         id: 'embedId',
@@ -66,7 +66,7 @@ export const useVideoTableConf = () => {
 
   const formConfig: ISuperFormConfig<IVideoDto>[] = useMemo(
     () => [
-      { name: 'title', required: true, label: 'Название', defaultValue: '' },
+      { name: 'title', required: true, label: 'Заголовок', defaultValue: '' },
       { name: 'embedId', required: true, label: 'Id видео', defaultValue: '' },
       { name: 'isMain', label: 'На главной', defaultValue: false, type: 'boolean' },
       { name: 'autoplay', label: 'Autoplay', defaultValue: true, type: 'boolean' },

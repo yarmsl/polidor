@@ -9,20 +9,11 @@ export const updateVideoController = async (req: Request, res: Response) => {
     const { videoId } = req.params;
     const { title, embedId, autoplay, mute, isMain, projects } = req.body;
 
-    if (isMain) {
-      await Video.updateMany({ isMain: true }, { isMain: false });
-    }
-
     if (Array.isArray(projects)) {
-      await Project.updateMany({ youtubeVideo: videoId }, { video: null });
+      await Project.updateMany({ videos: videoId }, { $pull: { videos: videoId } });
+
       if (projects.length)
-        await Project.updateMany({ _id: { $in: projects } }, { youtubeVideo: videoId });
-      await Video.updateMany(
-        { projects: { $in: projects } },
-        {
-          $pullAll: { projects },
-        },
-      );
+        await Project.updateMany({ _id: { $in: projects } }, { $addToSet: { videos: videoId } });
     }
 
     const editedVideo = await Video.findByIdAndUpdate(
@@ -30,6 +21,7 @@ export const updateVideoController = async (req: Request, res: Response) => {
       { title, embedId, autoplay, mute, isMain, projects },
       { new: true },
     );
+
     res.status(200).json(editedVideo);
     return;
   } catch (e) {

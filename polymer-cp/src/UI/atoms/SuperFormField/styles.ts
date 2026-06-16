@@ -2,6 +2,11 @@ export const styles: TStyles = {
   listItem: {
     display: 'flex',
     alignItems: 'center',
+    width: '100%',
+    minWidth: 0,
+  },
+  listItemText: {
+    whiteSpace: 'wrap',
   },
   listItemIcon: {
     width: '36px',

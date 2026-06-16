@@ -79,6 +79,13 @@ const ProjectItem = ({ project }: IProjectItemProps) => {
       </TableCell>
       <TableCell>
         <TextCellWithEdit<projEditTypes>
+          edit='videos'
+          openModal={openEditModal}
+          val={project.videos?.map((video) => video.title) || []}
+        />
+      </TableCell>
+      <TableCell>
+        <TextCellWithEdit<projEditTypes>
           edit='tags'
           openModal={openEditModal}
           val={project.tags?.map((tag) => tag.name) || []}

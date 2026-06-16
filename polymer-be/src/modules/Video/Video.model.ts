@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const customerSchema = new Schema<IVideo>(
+const videoSchema = new Schema<IVideo>(
   {
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
@@ -13,4 +13,4 @@ const customerSchema = new Schema<IVideo>(
   { timestamps: true },
 );
 
-export const Video = model('YoutubeVideo', customerSchema);
+export const Video = model('Video', videoSchema);

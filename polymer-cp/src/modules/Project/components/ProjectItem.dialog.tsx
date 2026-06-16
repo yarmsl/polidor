@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, ChangeEvent, useRef } from 'react';
+import { memo, useState, useCallback, ChangeEvent, useRef, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
@@ -18,6 +18,7 @@ import {
 import { SERVER_URL } from '~/lib/constants';
 import { file2optiDataurl, file2optiFile } from '~/lib/imageOptimaze';
 import { useGetAllTagsQuery } from '~/modules/Tag/service';
+import { useGetAllVideosQuery } from '~/modules/Video/service';
 import { useAppDispatch } from '~/store';
 import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
@@ -35,6 +36,7 @@ export type projEditTypes =
   | 'customer'
   | 'addImgs'
   | 'editImgs'
+  | 'videos'
   | 'order';
 
 interface IProjectDialogProps {
@@ -45,9 +47,19 @@ interface IProjectDialogProps {
 const ProjectItemDialog = ({ project, edit }: IProjectDialogProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const [editProject, { isLoading }] = useEditProjectMutation();
-  const { handleSubmit, control } = useForm<ISendProjectData>();
+  const defaultValues = useMemo<ISendProjectData>(
+    () => ({
+      ...project,
+      customer: project.customer._id,
+      tags: project.tags.map(({ _id }) => _id),
+      videos: project.videos.map(({ _id }) => _id),
+    }),
+    [project],
+  );
+  const { handleSubmit, control } = useForm<ISendProjectData>({ defaultValues });
   const { data: tags } = useGetAllTagsQuery();
   const { data: customers } = useGetAllCustomersQuery('');
+  const { data: videos } = useGetAllVideosQuery();
   const [sources, serSources] = useState(project.images);
   const [files, setFiles] = useState<File[]>([]);
   const [upLoading, setUpLoading] = useState(false);
@@ -187,6 +199,48 @@ const ProjectItemDialog = ({ project, edit }: IProjectDialogProps): JSX.Element 
                 fullWidth
                 onChange={onChange}
               />
+            )}
+          />
+        )}
+
+        {edit === 'videos' && (
+          <Controller
+            control={control}
+            defaultValue={[]}
+            name='videos'
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                color={'warning'}
+                error={!!error}
+                helperText={error ? error.message : null}
+                label='Выберите одно или несколько видео'
+                size='small'
+                sx={styles.input}
+                value={value}
+                SelectProps={{
+                  multiple: true,
+                  renderValue: (selected) => {
+                    const print = (selected as string[])?.map((id) => {
+                      return videos?.find((video) => video._id === id)?.title;
+                    });
+                    return <div>{print?.join(', ')}</div>;
+                  },
+                  MenuProps: {
+                    PaperProps: { style: { maxHeight: 380, marginTop: 5 } },
+                  },
+                }}
+                fullWidth
+                select
+                onChange={onChange}
+              >
+                {videos?.map((video, i) => (
+                  <MenuItem key={i} value={video._id} dense>
+                    <Checkbox checked={value?.includes(video._id)} size='small' />
+                    <ListItemText>{video.title}</ListItemText>
+                    {video.isMain && <ListItemIcon>На главной</ListItemIcon>}
+                  </MenuItem>
+                )) || <p>wait...</p>}
+              </TextField>
             )}
           />
         )}

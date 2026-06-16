@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import { genericMemo, SERVER_URL } from '~/lib/constants';
 
 import { styles } from './styles';
+import { SuperFormMenuItem } from './SuperFormMenuItem';
 
 export const SuperFormField = genericMemo(
   <T,>({ name, defaultValue, type, rules, selectItems, ...rest }: ISuperFormFieldProps<T>) => {
@@ -25,17 +26,44 @@ export const SuperFormField = genericMemo(
             maxRows={type === 'multiline' ? 8 : undefined}
             minRows={type === 'multiline' ? 3 : undefined}
             multiline={type === 'multiline'}
-            select={type && ['select', 'multiselect'].includes(type)}
+            select={['select', 'multiselect'].includes(type!)}
             value={value}
             SelectProps={{
               multiple: type === 'multiselect',
+              renderValue: (selected) => {
+                if (['select', 'multiselect'].includes(type!)) {
+                  const itemsMap: Record<string, { label: string; src?: string }> = {};
+                  selectItems?.forEach(({ src, label, value }) => {
+                    itemsMap[value] = { label, src };
+                  });
+
+                  if (type === 'multiselect') {
+                    return (
+                      <>
+                        {(selected as string[])?.map((id) => {
+                          const { src, label } = itemsMap[id] || {};
+
+                          return <SuperFormMenuItem key={id} label={label} src={src} value={id} />;
+                        })}
+                      </>
+                    );
+                  } else if (type === 'select') {
+                    const { src, label } = itemsMap[selected as string] || {};
+
+                    return <SuperFormMenuItem label={label} src={src} value={selected as string} />;
+                  }
+                }
+              },
+              MenuProps: {
+                PaperProps: { style: { maxHeight: 380, marginTop: 5 } },
+              },
             }}
             onChange={onChange}
             {...rest}
           >
-            {type && ['select', 'multiselect'].includes(type) && selectItems
-              ? selectItems.map(({ src, label, value }) => (
-                  <MenuItem key={value} value={value}>
+            {['select', 'multiselect'].includes(type!) && selectItems
+              ? selectItems.map(({ src, value, label }) => (
+                  <MenuItem value={value}>
                     <Box sx={styles.listItem}>
                       {src ? (
                         <ListItemIcon sx={styles.listItemIcon}>

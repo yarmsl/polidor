@@ -14,6 +14,7 @@ interface Project {
 interface IProject extends Project {
   customer: string;
   tags: string[];
+  videos: string[];
 }
 
 interface IProjectWithCustomer extends Project {
@@ -34,6 +35,7 @@ interface IProjectFull {
   createdAt: string;
   updatedAt: string;
   order: number;
+  videos: IVideo[];
 }
 interface IEditProject {
   id: string;
@@ -49,4 +51,5 @@ interface ISendProjectData {
   tags?: string[];
   slug?: string;
   order?: number;
+  videos?: string[];
 }

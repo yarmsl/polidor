@@ -21,9 +21,12 @@ export const deleteProjectController = async (req: Request, res: Response) => {
         $pull: { projects: removingProject._id },
       });
 
-      await Video.findByIdAndUpdate(removingProject.youtubeVideo, {
-        $pull: { projects: removingProject._id },
-      });
+      await Video.updateMany(
+        { _id: { $in: removingProject.videos } },
+        {
+          $pull: { projects: removingProject._id },
+        },
+      );
 
       await Tag.updateMany(
         { _id: { $in: removingProject.tags } },

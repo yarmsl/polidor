@@ -12,6 +12,7 @@ const Customer = lazy(() => import('./pages/CustomerPage'));
 const Home = lazy(() => import('./pages/HomePage'));
 const IndDesEngineering = lazy(() => import('./pages/IndDesEngineeringPage'));
 const Production = lazy(() => import('./pages/ProductionPage'));
+const Videos = lazy(() => import('./pages/VideosPage'));
 const Project = lazy(() => import('./pages/ProjectPage'));
 const Projects = lazy(() => import('./pages/ProjectsPage'));
 const Tags = lazy(() => import('./pages/TagsPage'));
@@ -27,6 +28,7 @@ const Router: FC = () => {
             '/production',
             '/about',
             '/contacts',
+            '/videos',
             '/projects',
             '/customer/:slug',
             '/project/:slug',
@@ -47,6 +49,7 @@ const Router: FC = () => {
                 <Route component={Production} path='/production' exact />
                 <Route component={About} path='/about' exact />
                 <Route component={Contacts} path='/contacts' exact />
+                <Route component={Videos} path='/videos' exact />
                 <Route component={Projects} path='/projects' exact />
                 <Route component={Customer} path='/customer/:slug' exact />
                 <Route component={Project} path='/project/:slug' exact />

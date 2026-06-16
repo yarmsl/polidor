@@ -3,19 +3,14 @@ import { FC, memo } from 'react';
 import Box from '@mui/material/Box';
 
 import { useGetMainVideoQuery } from '~/store/Data';
-import VideoBox from '~/UI/atoms/VideoBox';
+import VideoCarousel from '~/UI/molecules/VideoCarousel';
 
 const MainVideo: FC = () => {
   const { data } = useGetMainVideoQuery();
-  if (!data || !data?.embedId) return null;
+
   return (
     <Box sx={styles.root}>
-      <VideoBox
-        autoplay={data?.autoplay}
-        embedId={data.embedId}
-        mute={data?.mute}
-        title={data?.title}
-      />
+      <VideoCarousel videos={data} />
     </Box>
   );
 };

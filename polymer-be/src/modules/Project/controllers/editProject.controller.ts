@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 
 import { Customer } from '~/modules/Customer';
 import { Tag } from '~/modules/Tag';
+import { Video } from '~/modules/Video';
 import { errorHandler, existsError, notFoundError } from '~/utils/errorHandler';
 
 import { Project } from '../Project.model';
@@ -14,7 +15,17 @@ export const editProjectController = async (req: Request, res: Response) => {
     let images: string[] | undefined = undefined;
     const imagesFilesPaths =
       req.files != null ? (req.files as Express.Multer.File[]).map((file) => file.path) : [];
-    const { title, year, done, customer, tags, images: imagesPaths, slug, order } = req.body;
+    const {
+      title,
+      year,
+      done,
+      customer,
+      tags,
+      images: imagesPaths,
+      slug,
+      order,
+      videos,
+    } = req.body;
     const projectExist = await Project.findOne({ slug });
     if (projectExist) {
       throw existsError('this project exists');
@@ -60,13 +71,28 @@ export const editProjectController = async (req: Request, res: Response) => {
           $push: { projects: editingProject._id },
         });
       }
+
       if (Array.isArray(tags)) {
         await Tag.updateMany(
           { projects: { $eq: editingProject._id } },
           { $pull: { projects: editingProject._id } },
         );
+
         if (tags.length)
           await Tag.updateMany({ _id: { $in: tags } }, { $push: { projects: editingProject._id } });
+      }
+
+      if (Array.isArray(videos)) {
+        await Video.updateMany(
+          { projects: { $eq: editingProject._id } },
+          { $pull: { projects: editingProject._id } },
+        );
+
+        if (videos.length)
+          await Video.updateMany(
+            { _id: { $in: videos } },
+            { $push: { projects: editingProject._id } },
+          );
       }
 
       const result = await Project.findByIdAndUpdate(projectId, {
@@ -78,6 +104,7 @@ export const editProjectController = async (req: Request, res: Response) => {
         images,
         slug,
         order,
+        videos,
       });
       return res.status(200).json(result);
     } else {

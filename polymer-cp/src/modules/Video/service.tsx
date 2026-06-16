@@ -2,7 +2,7 @@ import { controlPanelAPI } from '~/store/service';
 
 const videoAPI = controlPanelAPI.injectEndpoints({
   endpoints: (build) => ({
-    addYouTubeVideo: build.mutation<IVideo, IVideoDto>({
+    addVideo: build.mutation<IVideo, IVideoDto>({
       query: (dto) => ({
         url: '/videos',
         method: 'POST',
@@ -10,7 +10,7 @@ const videoAPI = controlPanelAPI.injectEndpoints({
       }),
       invalidatesTags: ['Video', 'Project', 'User'],
     }),
-    editYouTubeVideo: build.mutation<IVideo, IEdit<Partial<IVideoDto>>>({
+    editVideo: build.mutation<IVideo, IEdit<Partial<IVideoDto>>>({
       query: ({ id, dto }) => ({
         url: `/videos/${id}`,
         method: 'PUT',
@@ -18,16 +18,16 @@ const videoAPI = controlPanelAPI.injectEndpoints({
       }),
       invalidatesTags: ['Video', 'Project'],
     }),
-    deleteYouTubeVideo: build.mutation<IMessage, string>({
+    deleteVideo: build.mutation<IMessage, string>({
       query: (id) => ({
         url: `/videos/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Video', 'Project', 'User'],
     }),
-    getAllYouTubeVideos: build.query<IVideoFull[], void>({
+    getAllVideos: build.query<IVideoFull[], void>({
       query: () => ({
-        url: '/videos',
+        url: '/videos/cp',
         method: 'GET',
       }),
       providesTags: ['Video'],
@@ -36,8 +36,8 @@ const videoAPI = controlPanelAPI.injectEndpoints({
 });
 
 export const {
-  useAddYouTubeVideoMutation,
-  useDeleteYouTubeVideoMutation,
-  useEditYouTubeVideoMutation,
-  useGetAllYouTubeVideosQuery,
+  useAddVideoMutation,
+  useDeleteVideoMutation,
+  useEditVideoMutation,
+  useGetAllVideosQuery,
 } = videoAPI;

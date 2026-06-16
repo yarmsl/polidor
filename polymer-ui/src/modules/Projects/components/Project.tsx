@@ -5,7 +5,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 
 import { SERVER_URL } from '~/lib/constants';
 import { useMedia } from '~/lib/useMedia';
-import VideoBox from '~/UI/atoms/VideoBox';
+import VideoCarousel from '~/UI/molecules/VideoCarousel';
 
 interface IProjectProps {
   project?: IProject;
@@ -61,14 +61,7 @@ const Project: FC<IProjectProps> = ({ project }) => {
           <Typography variant='subtitle1'>Изображения взяты из открытых источников</Typography>
         </Box>
       )}
-      {project?.youtubeVideo ? (
-        <VideoBox
-          autoplay={project.youtubeVideo.autoplay}
-          embedId={project.youtubeVideo.embedId}
-          mute={project.youtubeVideo.mute}
-          title={project.youtubeVideo.title}
-        />
-      ) : null}
+      <VideoCarousel videos={project?.videos} />
       <Button color='primary' sx={{ mt: 2 }} variant='contained' onClick={() => router.goBack()}>
         Вернуться назад
       </Button>

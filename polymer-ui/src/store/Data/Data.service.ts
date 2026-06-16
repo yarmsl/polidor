@@ -88,9 +88,15 @@ export const dataAPI = createApi({
         method: 'GET',
       }),
     }),
-    getMainVideo: build.query<IVideo, void>({
+    getMainVideo: build.query<IVideo[], void>({
       query: () => ({
         url: '/videos/main',
+        method: 'GET',
+      }),
+    }),
+    getVideos: build.query<IVideoFull[], void>({
+      query: () => ({
+        url: '/videos',
         method: 'GET',
       }),
     }),
@@ -112,4 +118,5 @@ export const {
   useFeedbackMutation,
   useGetMainPicturesQuery,
   useGetMainVideoQuery,
+  useGetVideosQuery,
 } = dataAPI;

@@ -27,6 +27,7 @@ const EditProject = (): JSX.Element => {
               <TableCell>Автор</TableCell>
               <TableCell>Проект</TableCell>
               <TableCell>Изображения</TableCell>
+              <TableCell>Видео</TableCell>
               <TableCell>Тэги</TableCell>
               <TableCell>Заказчик</TableCell>
               <TableCell>Что сделано</TableCell>

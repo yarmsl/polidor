@@ -22,8 +22,15 @@ fi
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
   echo "### Downloading recommended TLS parameters ..."
   mkdir -p "$data_path/conf"
+  
+  # Скачиваем оригинальный файл конфигурации SSL от Certbot
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > "$data_path/conf/options-ssl-nginx.conf"
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "$data_path/conf/ssl-dhparams.pem"
+  
+  # ПРАВКА ДЛЯ РОССИИ/ТСПУ: Модифицируем скачанный файл, отключая TLSv1.3
+  echo "### Modifying options-ssl-nginx.conf for TLS 1.2 strictly..."
+  sed -i 's/ssl_protocols.*/ssl_protocols TLSv1.2;/' "$data_path/conf/options-ssl-nginx.conf"
+  
   echo
 fi
 

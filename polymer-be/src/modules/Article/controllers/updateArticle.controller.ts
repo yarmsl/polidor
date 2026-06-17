@@ -10,7 +10,7 @@ export const updateArticleController = async (req: Request, res: Response) => {
     let images: string[] | undefined = undefined;
     const imagesFilesPaths =
       req.files != null ? (req.files as Express.Multer.File[]).map((file) => file.path) : [];
-    const { title, content, images: imagesPaths } = req.body;
+    const { title, content, images: imagesPaths, slug } = req.body;
 
     const editingArticle = await Article.findById(articleId);
 
@@ -46,7 +46,7 @@ export const updateArticleController = async (req: Request, res: Response) => {
     if (editingArticle) {
       const result = await Article.findByIdAndUpdate(
         editingArticle._id,
-        { title, content, images },
+        { title, content, images, slug },
         { new: true },
       );
       return res.status(200).json(result);

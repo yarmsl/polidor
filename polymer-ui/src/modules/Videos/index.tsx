@@ -2,15 +2,22 @@ import React from 'react';
 
 import { Box, Container, Typography } from '@mui/material';
 
-import { useGetVideosQuery } from '~/store/Data';
+import { useGetArticlesDataQuery, useGetVideosQuery } from '~/store/Data';
 import VideoBox from '~/UI/atoms/VideoBox';
 import ProjectsDrawer from '~/UI/molecules/ProjectsDrawer';
 
+import ArticlePromDisCard from '../InDesEngineering/components/ArticlePromDisCard';
+
 const Videos: React.FC = () => {
+  const { data: articles } = useGetArticlesDataQuery('video');
+
   const { data } = useGetVideosQuery();
 
   return (
     <Container maxWidth='md' sx={styles.root}>
+      {articles?.map((article, i) => (
+        <ArticlePromDisCard key={article._id} article={article} reverse={i % 2 === 0} />
+      ))}
       {data?.map(({ autoplay, embedId, title, mute, projects }) => (
         <Box key={embedId} sx={styles.main}>
           <Typography variant='h5' gutterBottom>

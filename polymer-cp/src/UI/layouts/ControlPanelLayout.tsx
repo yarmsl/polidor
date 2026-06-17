@@ -75,7 +75,7 @@ const pages = [
     access: 'user',
   },
   {
-    title: 'Статьи (Инжиниринг)',
+    title: 'Статьи (Инжиниринг / Видео)',
     path: '/ind_des_engin_articles',
     icon: <DesignServicesIcon />,
     access: 'user',

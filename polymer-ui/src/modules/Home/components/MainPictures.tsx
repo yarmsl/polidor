@@ -36,7 +36,7 @@ const MainPictures: FC<IMainPicturesProps> = ({ swiperIndex }) => {
 const styles: TStyles = {
   root: {
     width: '100%',
-    height: { xs: 'unset', md: '180px' },
+
     display: 'flex',
     flexDirection: { xs: 'column', md: 'row' },
     alignItems: 'center',
@@ -49,7 +49,7 @@ const styles: TStyles = {
     },
     '&>div': {
       width: { xs: '100%', md: '33.33%' },
-      height: '100%',
+      aspectRatio: '4/3',
       boxSizing: 'border-box',
 
       '& img': {

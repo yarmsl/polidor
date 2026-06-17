@@ -8,7 +8,13 @@ import projects from '~/assets/projects.webp';
 import promdis from '~/assets/promdis.webp';
 import MainSlider from '~/UI/atoms/MainSlider';
 
-const bannerPaths = ['/indastrial_design_and_engineering', '/production', '/projects', '/about'];
+const bannerPaths = [
+  '/indastrial_design_and_engineering',
+  '/production',
+  '/videos',
+  '/projects',
+  '/about',
+];
 
 const banner: Record<string, { title: string; text: string; image: string }> = {
   '/indastrial_design_and_engineering': {
@@ -20,6 +26,11 @@ const banner: Record<string, { title: string; text: string; image: string }> = {
     title: 'Производство',
     text: 'УРАЛ-ПОЛИМЕР включает в себя четыре промышленных предприятия, расположенных на отдельных, независимых производственных площадях. Общая площадь производственных помещений составляет 11000 кв. м. Общая численность персонала – более 250 человек.',
     image: production,
+  },
+  '/videos': {
+    title: 'Видео о производстве «Уралполимер» — технологии, люди и проекты изнутри',
+    text: 'Как создаются современные композитные детали для транспорта и промышленности? Что стоит за серийным производством — от первого эскиза до готового изделия? В этом разделе собраны видео о компании «УралПолимер», которые позволяют увидеть производственный процесс воочию: работу инженеров, операторов, конструкторов и специалистов, создающих решения для транспортного машиностроения.',
+    image: projects,
   },
   '/projects': {
     title: 'Проекты',

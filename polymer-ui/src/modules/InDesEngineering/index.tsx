@@ -13,7 +13,7 @@ import { useGetArticlesDataQuery, useGetTagsDataQuery } from '~/store/Data';
 const IndDesEngineering: React.FC = () => {
   const router = useHistory();
   const { data: tags, isLoading: isLoadingTags } = useGetTagsDataQuery('');
-  const { data: articles } = useGetArticlesDataQuery('');
+  const { data: articles } = useGetArticlesDataQuery('indastrial_design_and_engineering');
   const { matchesDesktop } = useMedia();
   return (
     <>

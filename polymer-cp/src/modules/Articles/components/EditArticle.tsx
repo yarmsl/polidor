@@ -28,6 +28,7 @@ const EditArticle = (): JSX.Element => {
               <TableCell>Изображения</TableCell>
               <TableCell>Заголовок</TableCell>
               <TableCell>Статья</TableCell>
+              <TableCell>Страница</TableCell>
               <TableCell>Создана</TableCell>
               <TableCell>Изменена</TableCell>
               <TableCell>Удалить</TableCell>

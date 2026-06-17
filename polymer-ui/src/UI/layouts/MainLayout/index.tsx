@@ -17,9 +17,7 @@ const MainLayout: FC<Child> = ({ children }) => {
     () =>
       [
         '/',
-        ...pages
-          .map((page) => page.path)
-          .filter((path) => !['/contacts', '/videos'].includes(path)),
+        ...pages.map((page) => page.path).filter((path) => !['/contacts'].includes(path)),
       ].includes(match.path) && match.isExact,
     [match],
   );

@@ -6,6 +6,7 @@ const articleSchema = new Schema<IArticle>(
     title: { type: String, required: true },
     content: { type: String, required: true },
     images: [{ type: String, required: true }],
+    slug: { type: String, required: true },
   },
   { timestamps: true },
 );

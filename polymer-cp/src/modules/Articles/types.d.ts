@@ -3,6 +3,7 @@ interface IArticle {
   title: string;
   content: string;
   images: string[];
+  slug: string;
 }
 
 interface IArticleFull extends IArticle {
@@ -20,4 +21,5 @@ interface ISendArticle {
   title?: string;
   content?: string;
   images?: string[];
+  slug?: string;
 }

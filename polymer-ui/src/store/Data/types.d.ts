@@ -34,6 +34,7 @@ interface IArticle {
   title: string;
   content: string;
   images: string[];
+  slug: 'indastrial_design_and_engineering' | 'video';
 }
 
 interface IStep {

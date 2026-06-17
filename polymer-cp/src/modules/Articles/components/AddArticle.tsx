@@ -2,13 +2,23 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { Box, Button, CircularProgress, Container, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  ListItemText,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { file2optiFile, file2optiDataurl } from '~/lib/imageOptimaze';
 import { useAppDispatch } from '~/store';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 import ImagesPreview from '~/UI/atoms/ImagesPreview';
 
+import { articleSlugsOptions } from './Consts';
 import { useAddArticleMutation } from '../store';
 
 const AddArticle = (): JSX.Element => {
@@ -23,6 +33,7 @@ const AddArticle = (): JSX.Element => {
       title: '',
       content: '',
       images: [],
+      slug: '',
     },
   });
   const [newArticle, { isLoading }] = useAddArticleMutation();
@@ -103,7 +114,7 @@ const AddArticle = (): JSX.Element => {
     <Container maxWidth={'xs'}>
       <Box component='form' sx={styles.form}>
         <Typography align='center' sx={{ mb: '12px' }} variant='h6'>
-          Новая статья на странице Промышленный дизайн и инжиниринг
+          Новая статья
         </Typography>
         <input
           ref={inputRef}
@@ -180,6 +191,37 @@ const AddArticle = (): JSX.Element => {
           rules={{
             required: 'Напишите статью',
           }}
+        />
+
+        <Controller
+          control={control}
+          defaultValue=''
+          name='slug'
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              color={'info'}
+              error={!!error}
+              helperText={error ? error.message : null}
+              label='Выберите страницу'
+              size='small'
+              sx={styles.field}
+              value={value}
+              SelectProps={{
+                MenuProps: {
+                  PaperProps: { style: { maxHeight: 380, marginTop: 5 } },
+                },
+              }}
+              fullWidth
+              select
+              onChange={onChange}
+            >
+              {articleSlugsOptions.map(({ label, value }, i) => (
+                <MenuItem key={i} value={value} dense>
+                  <ListItemText>{label}</ListItemText>
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
         />
 
         <Button

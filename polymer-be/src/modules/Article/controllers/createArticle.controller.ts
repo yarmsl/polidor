@@ -9,13 +9,14 @@ export const createArticleController = async (req: Request, res: Response) => {
     const { userId } = req.body.user;
     const images =
       req.files != null ? (req.files as Express.Multer.File[]).map((file) => file.path) : [];
-    const { title, content } = req.body;
+    const { title, content, slug } = req.body;
 
     const newArticle = new Article({
       author: userId,
       title,
       content,
       images,
+      slug,
     });
     await newArticle.save();
 

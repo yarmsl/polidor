@@ -12,6 +12,7 @@ import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 import TextCellWithEdit from '~/UI/atoms/TextCellWithEdit';
 
 import ArticleItemDialog, { articleEditTypes } from './ArticleItem.dialog';
+import { articleSlugsOptions } from './Consts';
 import { useDeleteArticleMutation } from '../store';
 
 interface IArticleItemProps {
@@ -63,6 +64,15 @@ const ArticleItem = ({ article }: IArticleItemProps) => {
           edit='content'
           openModal={openEditModal}
           val={article.content}
+        />
+      </TableCell>
+      <TableCell>
+        <TextCellWithEdit<articleEditTypes>
+          edit='slug'
+          openModal={openEditModal}
+          val={
+            articleSlugsOptions.find(({ value }) => value === article.slug)?.label || article.slug
+          }
         />
       </TableCell>
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{str2rusDate(article.createdAt)}</TableCell>

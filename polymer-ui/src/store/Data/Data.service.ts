@@ -26,10 +26,11 @@ export const dataAPI = createApi({
         method: 'GET',
       }),
     }),
-    getArticlesData: build.query<IArticle[], string>({
-      query: () => ({
+    getArticlesData: build.query<IArticle[], IArticle['slug'] | void>({
+      query: (slug) => ({
         url: '/article',
         method: 'GET',
+        params: slug ? { slug } : undefined,
       }),
     }),
     getProductionArticlesData: build.query<IProductionArticle[], string>({

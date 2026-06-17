@@ -4,8 +4,12 @@ import { Article } from '../Article.model';
 
 export const readArticlesController = async (req: Request, res: Response): Promise<void> => {
   const userId = req.body?.user?.userId;
+  const slug = req.query.slug as string | undefined;
+
   try {
-    const articles = await Article.find().populate('author');
+    const filter = slug ? { slug } : {};
+    const articles = await Article.find(filter).populate('author');
+
     if (userId) {
       res.status(200).json(articles);
     } else {
@@ -15,6 +19,7 @@ export const readArticlesController = async (req: Request, res: Response): Promi
           title: article.title,
           content: article.content,
           images: article.images,
+          slug: article.slug,
         };
       });
       res.status(200).json(articlesFE);

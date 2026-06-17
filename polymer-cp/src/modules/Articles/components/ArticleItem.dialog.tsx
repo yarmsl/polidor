@@ -2,7 +2,16 @@ import { memo, useState, useCallback, ChangeEvent, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
-import { Box, Button, CircularProgress, Container, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  ListItemText,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { file2optiDataurl, file2optiFile } from '~/lib/imageOptimaze';
 import { useAppDispatch } from '~/store';
@@ -10,9 +19,10 @@ import { closeModalAction } from '~/store/ModalStack';
 import { showErrorSnackbar, showSuccessSnackbar } from '~/store/Notifications';
 import ImagesPreview from '~/UI/atoms/ImagesPreview';
 
+import { articleSlugsOptions } from './Consts';
 import { useEditArticleMutation } from '../store';
 
-export type articleEditTypes = 'title' | 'content' | 'addImgs' | 'editImgs';
+export type articleEditTypes = 'title' | 'content' | 'addImgs' | 'editImgs' | 'slug';
 
 interface IArticleDialogProps {
   article: IArticleFull;
@@ -90,7 +100,7 @@ const ArticleItemDialog = ({ article, edit }: IArticleDialogProps): JSX.Element 
   };
 
   const removeSource = useCallback((n: number) => {
-    serSources((p) => p.filter((src, i) => i !== n));
+    serSources((p) => p.filter((_src, i) => i !== n));
   }, []);
 
   const toFirstPlace = useCallback((n: number) => {
@@ -142,6 +152,38 @@ const ArticleItemDialog = ({ article, edit }: IArticleDialogProps): JSX.Element 
                 fullWidth
                 onChange={onChange}
               />
+            )}
+          />
+        )}
+
+        {edit === 'slug' && (
+          <Controller
+            control={control}
+            defaultValue={article.slug}
+            name='slug'
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                error={!!error}
+                helperText={error ? error.message : null}
+                label='Выберите страницу'
+                size='small'
+                sx={styles.field}
+                value={value}
+                SelectProps={{
+                  MenuProps: {
+                    PaperProps: { style: { maxHeight: 380, marginTop: 5 } },
+                  },
+                }}
+                fullWidth
+                select
+                onChange={onChange}
+              >
+                {articleSlugsOptions.map(({ label, value }, i) => (
+                  <MenuItem key={i} value={value} dense>
+                    <ListItemText>{label}</ListItemText>
+                  </MenuItem>
+                ))}
+              </TextField>
             )}
           />
         )}

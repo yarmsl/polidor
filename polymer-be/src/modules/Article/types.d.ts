@@ -5,4 +5,5 @@ interface IArticle extends TDocument {
   title: string;
   content: string;
   images: string[];
+  slug: string;
 }

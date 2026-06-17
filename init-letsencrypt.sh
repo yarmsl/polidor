@@ -22,8 +22,13 @@ fi
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
   echo "### Downloading recommended TLS parameters ..."
   mkdir -p "$data_path/conf"
-  curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > "$data_path/conf/options-ssl-nginx.conf"
-  curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "$data_path/conf/ssl-dhparams.pem"
+  curl -s https://githubusercontent.com > "$data_path/conf/options-ssl-nginx.conf"
+  curl -s https://githubusercontent.com > "$data_path/conf/ssl-dhparams.pem"
+  
+  # Автоматическая замена на TLS 1.2 в случае скачивания нового файла:
+  sed -i 's/ssl_protocols.*/ssl_protocols TLSv1.2;/' "$data_path/conf/options-ssl-nginx.conf"
+  sed -i 's/ssl_prefer_server_ciphers.*/ssl_prefer_server_ciphers on;/' "$data_path/conf/options-ssl-nginx.conf"
+  
   echo
 fi
 
